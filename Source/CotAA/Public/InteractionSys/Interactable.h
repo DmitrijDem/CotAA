@@ -26,6 +26,6 @@ class COTAA_API IInteractable
 public:
 
 	// Interaction method. Should be called only by an Interactor Component when input action is pressed, once.
-	UFUNCTION(BlueprintNativeEvent, Category = "Interact reaction")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interact reaction")
 	void Interact(AActor* Interactor);
 };

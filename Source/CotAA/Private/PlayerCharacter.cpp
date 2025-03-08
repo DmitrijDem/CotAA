@@ -10,8 +10,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 /* ------------------------------ Components Libraries------------------------------- */
 #include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Camera/CameraComponent.h"
 /* ------------------------------ Custom Libraries------------------------------- */
 
 #include "InteractionSys/Interactable.h"
@@ -24,6 +24,8 @@ APlayerCharacter::APlayerCharacter()
 {
 	// It is set to true because I might need Tick() for player
 	PrimaryActorTick.bCanEverTick = true;
+
+	RootComponent = GetCapsuleComponent();
 
 	// Setting up spring arm and camera 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpirngArm");
@@ -49,16 +51,6 @@ void APlayerCharacter::BeginPlay()
 			Subsystem->AddMappingContext(InputMapping, 0);
 		}
 	}
-
-	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
-	// Setting capsule component for interactions
-
-	if (CapsuleComp)
-	{
-		CapsuleComp->SetGenerateOverlapEvents(true);
-		CapsuleComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnBeginOverlap);
-		CapsuleComp->OnComponentEndOverlap.AddDynamic(this, &APlayerCharacter::OnEndOverlap);
-	}
 }
 
 /* ------------------------------ Tick ------------------------------- */
@@ -78,8 +70,22 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
 		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
 		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
-		Input->BindAction(InteractAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Interact);
+		Input->BindAction(InteractAction, ETriggerEvent::Started , this, &APlayerCharacter::Interact);
 	}
+
+	// Setting capsule component for interactions
+
+	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
+
+	if (CapsuleComp)
+	{
+		CapsuleComp->SetGenerateOverlapEvents(true);
+		CapsuleComp->SetCollisionProfileName(TEXT("Pawn"));
+		GEngine->AddOnScreenDebugMessage(1, 10.0f, FColor::Red, TEXT("Setting up overlaps"));
+		CapsuleComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnBeginOverlap);
+		CapsuleComp->OnComponentEndOverlap.AddDynamic(this, &APlayerCharacter::OnEndOverlap);
+	}
+
 }
 
 /* ------------------------------ MoveAction handler-function ------------------------------- */
@@ -129,7 +135,7 @@ void APlayerCharacter::Jump()
 /* ------------------------------ InteractAction handler-function ------------------------------- */
 void APlayerCharacter::Interact()
 {
-	//GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::Red, TEXT("Interaction"));
+	GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::Red, TEXT("E pressed"));
 
 	// If *Interaction key* (Default: E) was pressed - calls Interact(AActor* Interactor) on object from one of Interactibles near player
 	// After some tries - this is best solution, maybe
