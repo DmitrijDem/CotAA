@@ -58,8 +58,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	/* ------------------------------ Interaction block ------------------------------- */
-//	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-//    UInteractionComponent* InteractionComponent;	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+    UInteractionComponent* InteractionComponent;	
 
 public:
 
