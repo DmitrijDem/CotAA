@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
-
-
 #include "PlayerCharacter.generated.h"
 
+	/* ------------------------------ Forward declaration block begin------------------------------- */
+// This block serves as "I know, there WILL BE some class which will be used in blueprints, but they are not #include here to clean the code and space"
+class UInteractionComponent;
+/* ------------------------------ Forward declaration block end------------------------------- */
 UCLASS()
 class COTAA_API APlayerCharacter : public ACharacter
 {
@@ -55,8 +57,24 @@ public:
 	/* ------------------------------ Enhanced Input setup function ------------------------------- */
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	/* ------------------------------ Enhanced Input handler-functions block ------------------------------- */
+	/* ------------------------------ Interaction block ------------------------------- */
+//	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+//    UInteractionComponent* InteractionComponent;	
+
+public:
+
+	// Capsule component overlap events to add objects from array
+	UFUNCTION()
+	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	// Capsule component overlap event to delete objects from array
+	UFUNCTION()
+	void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 protected:
+	// Function that handles interactions with UInteractible-implemented actors
+	UFUNCTION()
+	void OnInteract();
 
 	// MoveAction handler
 	UFUNCTION()
@@ -69,22 +87,4 @@ protected:
 	// InteractAction handler
 	void Jump();
 
-	// InteractAction handler
-	UFUNCTION()
-	void Interact();
-
-	/* ------------------------------ Interaction system variables ------------------------------- */
-public:
-
-	// Array of Actor* objects near player to interact with
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactables")
-	TArray<AActor*> InteractablesInRange;
-
-	// Capsule component overlap events to add objects from array
-	UFUNCTION()
-	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	// Capsule component overlap event to delete objects from array
-	UFUNCTION()
-	void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 };
