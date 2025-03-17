@@ -2,11 +2,9 @@
 
 
 #include "PlayerCharacter.h"
-
 /* ------------------------------ Enhanced Input Libraries------------------------------- */
-#include "InputMappingContext.h"
-#include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
 /* ------------------------------ Components Libraries------------------------------- */
 #include "GameFramework/SpringArmComponent.h"
@@ -14,37 +12,47 @@
 #include "Camera/CameraComponent.h"
 /* ------------------------------ Custom Libraries------------------------------- */
 
-#include "InteractionSys/Interactable.h"
-// Yes, this #include impossible to avoid :(
-#include "InteractionSys/InteractionComponent.h"
-/* ------------------------------ Constructor ------------------------------- */
+#include "Misc/OutputDeviceNull.h"
+/* ------------------------------ Constructor (1) ------------------------------- */
 APlayerCharacter::APlayerCharacter()
 {
-	// It is set to true because I might need Tick() for player
+
 	PrimaryActorTick.bCanEverTick = true;
 
 	RootComponent = GetCapsuleComponent();
 
 	// Setting up spring arm and camera 
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpirngArm");
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
 	SpringArm->SetupAttachment(RootComponent);
+	SpringArm->TargetArmLength = 150.0f;
+	SpringArm->SocketOffset = FVector(0.0f, 55.0f, 60.0f);
 	SpringArm->bUsePawnControlRotation = true;
+	SpringArm->bInheritPitch = true;
+	SpringArm->bInheritYaw = true;
+	SpringArm->bInheritRoll = false;
+
+	SpringArm->bEnableCameraLag = true;
+	SpringArm->CameraLagSpeed = 5.0f;
+
+	SpringArm->CameraLagMaxDistance = 100.0f;
 
 	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
 	Camera->SetupAttachment(SpringArm);
 
 	bUseControllerRotationYaw = false;
-	GetCharacterMovement()->bOrientRotationToMovement = false;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+
+	// Setting capsule component for interactions
+
+	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
 
 	// Interaction Component
-	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>("InteractionComponent");
 }
 
-/* ------------------------------ BeginPlay ------------------------------- */
+/* ------------------------------ BeginPlay (2) ------------------------------- */
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
@@ -52,59 +60,32 @@ void APlayerCharacter::BeginPlay()
 			Subsystem->AddMappingContext(InputMapping, 0);
 		}
 	}
-
-
 }
 
-/* ------------------------------ Tick ------------------------------- */
+/* ------------------------------ Tick (3) ------------------------------- */
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
-/* ------------------------------ Enhanced Input Setup ------------------------------- */
+/* ------------------------------ Enhanced Input Setup (4) ------------------------------- */
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	if (UEnhancedInputComponent* Input = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		Input->BindAction(MoveAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
-		Input->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
-		Input->BindAction(JumpAction, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
-		Input->BindAction(InteractAction, ETriggerEvent::Started, this, &APlayerCharacter::OnInteract);
+		GEngine->AddOnScreenDebugMessage(0, 2.0f, FColor::Red, "Player Character Input set up");
+		Input->BindAction(IA_Move, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
+		Input->BindAction(IA_Look, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
+		Input->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
 	}
-
-	// Setting capsule component for interactions
-
-	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
-
-	if (CapsuleComp)
-	{
-		CapsuleComp->SetGenerateOverlapEvents(true);
-		CapsuleComp->SetCollisionProfileName(TEXT("Pawn"));
-		GEngine->AddOnScreenDebugMessage(1, 10.0f, FColor::Red, TEXT("Setting up overlaps"));
-		CapsuleComp->OnComponentBeginOverlap.AddDynamic(this, &APlayerCharacter::OnBeginOverlap);
-		CapsuleComp->OnComponentEndOverlap.AddDynamic(this, &APlayerCharacter::OnEndOverlap);
-	}
-
+	
 }
 
 /* ------------------------------ Enhanced Input handler-functions block ------------------------------- */
-
-// Function that handles interactions with UInteractible-implemented actors
-void APlayerCharacter::OnInteract()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 1.0f, FColor::White, TEXT("Trying to call Interact from component"));
-
-	if (InteractionComponent)
-	{
-		InteractionComponent->Interact();
-	}
-}
-
-/* ------------------------------ MoveAction handler-function ------------------------------- */
+/* ------------------------------ MoveAction handler-function (5) ------------------------------- */
 void APlayerCharacter::Move(const FInputActionValue& Value)
 {
 	FVector2D InputVector = Value.Get<FVector2D>();
@@ -126,7 +107,7 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
-/* ------------------------------ LookAction handler-function ------------------------------- */
+/* ------------------------------ LookAction handler-function (6) ------------------------------- */
 void APlayerCharacter::Look(const FInputActionValue& Value)
 {
 	FVector2D InputVector = Value.Get<FVector2D>();
@@ -140,29 +121,10 @@ void APlayerCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-/* ------------------------------ JumpAction handler-function ------------------------------- */
+/* ------------------------------ JumpAction handler-function (7) ------------------------------- */
 void APlayerCharacter::Jump()
 {
 	GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::White, TEXT("Jump action"));
 
 	ACharacter::Jump();
-}
-
-/* ------------------------------ OnBeginOverlap event ------------------------------- */
-/**
-* Function which handles actors overlapping with player capsule
-*/
-void APlayerCharacter::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-
-
-}
-
-/* ------------------------------ OnEndOverlap event ------------------------------- */
-/**
-* Function which handles actors which stopped overlapping with player capsule
-*/
-void APlayerCharacter::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
 }
