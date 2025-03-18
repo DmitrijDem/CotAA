@@ -11,7 +11,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Camera/CameraComponent.h"
 /* ------------------------------ Custom Libraries------------------------------- */
-
+#include "InteractionSystem/InteractionComponent.h"
 #include "Misc/OutputDeviceNull.h"
 /* ------------------------------ Constructor (1) ------------------------------- */
 APlayerCharacter::APlayerCharacter()
@@ -47,6 +47,7 @@ APlayerCharacter::APlayerCharacter()
 	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
 
 	// Interaction Component
+	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>("InteractionComponent");
 }
 
 /* ------------------------------ BeginPlay (2) ------------------------------- */
@@ -80,8 +81,39 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		Input->BindAction(IA_Move, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
 		Input->BindAction(IA_Look, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
 		Input->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
+		if (IA_Interact)
+		{
+			Input->BindAction(IA_Interact, ETriggerEvent::Started, this, &APlayerCharacter::OnIA_InteractStarted);
+			Input->BindAction(IA_Interact, ETriggerEvent::Ongoing, this, &APlayerCharacter::OnIA_InteractOngoing);
+			Input->BindAction(IA_Interact, ETriggerEvent::Completed, this, &APlayerCharacter::OnIA_InteractOngoing);
+		}
+	}
+}
+
+// (4.1)
+
+	void APlayerCharacter::OnIA_InteractStarted()
+	{
+		InteractionComponent->InteractBegin();
 	}
 	
+// (4.2)
+void APlayerCharacter::OnIA_InteractOngoing(const FInputActionInstance& Instance)
+{
+	float ElapsedSeconds = Instance.GetElapsedTime();
+	InteractionComponent->OnInteractionPressOngoing.Broadcast(ElapsedSeconds);
+}
+
+// (4.3)
+void APlayerCharacter::OnIA_InteractCompleted()
+{
+	InteractionComponent->OnInteractionPressOngoing.RemoveAll(this);
+	if (InteractionComponent->InteractionWidgetRef->FindFunction("SetProgressPercent"))
+	{
+		FOutputDeviceNull OutputDeviceNull;
+		FString Command = FString::Printf(TEXT("SetProgressPercent %f"), 0.0f);
+		InteractionComponent->InteractionWidgetRef->CallFunctionByNameWithArguments(*Command, OutputDeviceNull, nullptr, true);
+	}
 }
 
 /* ------------------------------ Enhanced Input handler-functions block ------------------------------- */
