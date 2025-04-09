@@ -64,7 +64,7 @@ public:
 	
 	// Function to handle IA_Interact
 	UFUNCTION(BlueprintCallable, Category = "InteractionFunction")
-	void InteractBegin();
+	void RequestInteraction();
 	
 	// Function to handle IA_Interact
 	UFUNCTION(BlueprintCallable, Category = "InteractionFunction")

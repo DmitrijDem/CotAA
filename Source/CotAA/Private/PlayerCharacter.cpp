@@ -12,8 +12,9 @@
 #include "Camera/CameraComponent.h"
 /* ------------------------------ Custom Libraries------------------------------- */
 #include "InteractionSystem/InteractionComponent.h"
+#include "InteractionSystem/InventoryComponent.h"
 #include "Misc/OutputDeviceNull.h"
-/* ------------------------------ Constructor (1) ------------------------------- */
+/* ------------------------------ Constructor ------------------------------- */
 APlayerCharacter::APlayerCharacter()
 {
 
@@ -48,9 +49,13 @@ APlayerCharacter::APlayerCharacter()
 
 	// Interaction Component
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>("InteractionComponent");
+
+	// Inventory Component
+
+	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("InventoryComponent");
 }
 
-/* ------------------------------ BeginPlay (2) ------------------------------- */
+/* ------------------------------ BeginPlay ------------------------------- */
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -63,7 +68,7 @@ void APlayerCharacter::BeginPlay()
 	}
 }
 
-/* ------------------------------ Tick (3) ------------------------------- */
+/* ------------------------------ Tick ------------------------------- */
 void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -77,52 +82,26 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 	if (UEnhancedInputComponent* Input = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
 	{
-		GEngine->AddOnScreenDebugMessage(0, 2.0f, FColor::Red, "Player Character Input set up");
-		Input->BindAction(IA_Move, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
-		Input->BindAction(IA_Look, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
-		Input->BindAction(IA_Jump, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
-		if (IA_Interact)
+		if (InputConfig)
 		{
-			Input->BindAction(IA_Interact, ETriggerEvent::Started, this, &APlayerCharacter::OnIA_InteractStarted);
-			Input->BindAction(IA_Interact, ETriggerEvent::Ongoing, this, &APlayerCharacter::OnIA_InteractOngoing);
-			Input->BindAction(IA_Interact, ETriggerEvent::Completed, this, &APlayerCharacter::OnIA_InteractOngoing);
+			Input->BindAction(InputConfig->IA_Move, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
+			Input->BindAction(InputConfig->IA_Look, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
+			Input->BindAction(InputConfig->IA_Jump, ETriggerEvent::Triggered, this, &APlayerCharacter::Jump);
+			if (InputConfig->IA_Interact && InteractionComponent)
+			{
+				Input->BindAction(InputConfig->IA_Interact, ETriggerEvent::Started, this, &APlayerCharacter::OnIA_InteractStarted);
+				Input->BindAction(InputConfig->IA_Interact, ETriggerEvent::Ongoing, this, &APlayerCharacter::OnIA_InteractOngoing);
+				Input->BindAction(InputConfig->IA_Interact, ETriggerEvent::Completed, this, &APlayerCharacter::OnIA_InteractOngoing);
+			}
 		}
 	}
 }
 
-// (4.1)
-
-	void APlayerCharacter::OnIA_InteractStarted()
-	{
-		InteractionComponent->InteractBegin();
-	}
-	
-// (4.2)
-void APlayerCharacter::OnIA_InteractOngoing(const FInputActionInstance& Instance)
-{
-	float ElapsedSeconds = Instance.GetElapsedTime();
-	InteractionComponent->OnInteractionPressOngoing.Broadcast(ElapsedSeconds);
-}
-
-// (4.3)
-void APlayerCharacter::OnIA_InteractCompleted()
-{
-	InteractionComponent->OnInteractionPressOngoing.RemoveAll(this);
-	if (InteractionComponent->InteractionWidgetRef->FindFunction("SetProgressPercent"))
-	{
-		FOutputDeviceNull OutputDeviceNull;
-		FString Command = FString::Printf(TEXT("SetProgressPercent %f"), 0.0f);
-		InteractionComponent->InteractionWidgetRef->CallFunctionByNameWithArguments(*Command, OutputDeviceNull, nullptr, true);
-	}
-}
-
 /* ------------------------------ Enhanced Input handler-functions block ------------------------------- */
-/* ------------------------------ MoveAction handler-function (5) ------------------------------- */
+/* ------------------------------ MoveAction handler-function ------------------------------- */
 void APlayerCharacter::Move(const FInputActionValue& Value)
 {
 	FVector2D InputVector = Value.Get<FVector2D>();
-
-	GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::White, TEXT("Move action"));
 
 	if (IsValid(Controller))
 	{
@@ -139,13 +118,11 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 	}
 }
 
-/* ------------------------------ LookAction handler-function (6) ------------------------------- */
+/* ------------------------------ LookAction handler-function ------------------------------- */
 void APlayerCharacter::Look(const FInputActionValue& Value)
 {
 	FVector2D InputVector = Value.Get<FVector2D>();
-
-	GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::White, TEXT("Look action"));
-
+	
 	if (IsValid(Controller))
 	{
 		AddControllerYawInput(InputVector.X);
@@ -153,10 +130,40 @@ void APlayerCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-/* ------------------------------ JumpAction handler-function (7) ------------------------------- */
+/* ------------------------------ JumpAction handler-function ------------------------------- */
 void APlayerCharacter::Jump()
 {
-	GEngine->AddOnScreenDebugMessage(1, 0.1f, FColor::White, TEXT("Jump action"));
-
 	ACharacter::Jump();
+}
+
+void APlayerCharacter::OnIA_InteractStarted()
+{
+	InteractionComponent->RequestInteraction();
+}
+
+void APlayerCharacter::OnIA_InteractOngoing(const FInputActionInstance& Instance)
+{
+	float ElapsedSeconds = Instance.GetElapsedTime();
+	InteractionComponent->OnInteractionPressOngoing.Broadcast(ElapsedSeconds);
+}
+
+void APlayerCharacter::OnIA_InteractCompleted()
+{
+	InteractionComponent->OnInteractionPressOngoing.RemoveAll(this);
+	if (InteractionComponent->InteractionWidgetRef->FindFunction("SetProgressPercent"))
+	{
+		FOutputDeviceNull OutputDeviceNull;
+		FString Command = FString::Printf(TEXT("SetProgressPercent %f"), 0.0f);
+		InteractionComponent->InteractionWidgetRef->CallFunctionByNameWithArguments(*Command, OutputDeviceNull, nullptr, true);
+	}
+}
+
+UInventoryComponent* APlayerCharacter::GetInventoryComponent() const
+{
+	if (InventoryComponent)
+	{
+		return Cast<UInventoryComponent>(GetComponentByClass(UInventoryComponent::StaticClass()));
+	}
+
+	return nullptr;
 }

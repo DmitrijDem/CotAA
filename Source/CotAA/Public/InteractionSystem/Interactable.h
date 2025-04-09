@@ -3,21 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Enums/InteractBehavior/InteractionType.h"
+#include "Enums/InteractBehavior/InteractionWith.h"
 #include "UObject/Interface.h"
 #include "Interactable.generated.h"
 
-/* ------------------------------ Enumerated to define interaction type ------------------------------- */
-// Enumerated to tell how interactable should be handled
-// Press - on button pressed (IA started\ended) - call Interact()
-// Hold - on some time button being holded - call Interact()
-UENUM(BlueprintType)
-enum class EInteractableType : uint8
-{
-	Press UMETA(DisplayName = "Press"),
-	Hold UMETA(DisplayName = "Hold"),
-};
-
-/* ------------------------------ Class Definition ------------------------------- */
+/**------------------------------ Forward Declaration ------------------------------- **/
+class UInventoryComponent;
+/**------------------------------ Class Definition ------------------------------- **/
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, Blueprintable)
 class UInteractable : public UInterface
@@ -25,25 +18,35 @@ class UInteractable : public UInterface
 	GENERATED_BODY()
 };
 
-/* ---------------------------- Interface Definition ----------------------------- */
+/**---------------------------- Interface Definition ----------------------------- **/
 
 /**
  * Interactable Component Interface. Receives calls from an Interactor component
- */
+ **/
 class COTAA_API IInteractable
 {
 	GENERATED_BODY()
 
-public:
 
-	// Interaction method. Should be called only by an Interactor Component when input action is pressed, once.
+public:
+	// Interaction method. Should be called only by an Interactor  when input action, once.
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction System handlig")
 	void Interact(AActor* Interactor);
 
-	// Returns EInteractableType to tell which interaction type is needed to interact with object
+	// Function I created in case I need to separate interactions
+	// Interaction method for loot. Should be called only by an Interactor when input action, once.
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction System handlig")
+	void InteractLootable(AActor* Interactor);
+
+	// Returns EInteractableType to tell which interaction type is needed to interact with object
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactable properties")
 	EInteractableType GetInteractionType();
+
+	// Returns EInteractWith to tell WHAT player interacts (NPC, loot, container, etc.)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactable properties")
+	EInteractionWith GetInteractWith();
+	
 	// Returns EInteractableType to tell which interaction type is needed to interact with object
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction System handlig")
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactable properties")
 	float GetHoldDuration();
 };

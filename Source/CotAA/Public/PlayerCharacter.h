@@ -3,15 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InputAction.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "InputDataConfig.h"
 #include "PlayerCharacter.generated.h"
 
-/* ------------------------------ Forward declaration block begin------------------------------- */
-// This block serves as "I know, there WILL BE some class which will be used in blueprints, but they are not #include here to clean the code and space"
+/**------------------------------ Forward declaration block begin------------------------------- **/
+// This block serves as "I know, there WILL BE some class which will be used in blueprints, but they are not #included yet"
 class UInteractionComponent;
-/* ------------------------------ Forward declaration block end------------------------------- */
+class UInventoryComponent;
+/**------------------------------ Forward declaration block end------------------------------- **/
 
 UCLASS()
 class COTAA_API APlayerCharacter : public ACharacter
@@ -19,69 +20,67 @@ class COTAA_API APlayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
-
-	/* ------------------------------ Components block------------------------------- */
+	/**------------------------------ Components block------------------------------- **/
 
 	UPROPERTY(VisibleAnywhere, Category = "EnhancedInput")
 	class USpringArmComponent* SpringArm;
 
 	UPROPERTY(VisibleAnywhere, Category = "EnhancedInput")
 	class UCameraComponent* Camera;
-	/* ------------------------------ Enhanced Input Block------------------------------- */
+	/**------------------------------ Enhanced Input Block------------------------------- **/
 protected:
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
 	class UInputMappingContext* InputMapping;
 
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* IA_Move;
+	UInputDataConfig* InputConfig;
 
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* IA_Look;
-
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* IA_Jump;
-	
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* IA_Interact;
-	
-	/* ------------------------------ Constructor (1) ------------------------------- */
+	/**------------------------------ Constructor ------------------------------- **/
 public:
 	APlayerCharacter();
 
-	/* ------------------------------ BeginPlay (2) ------------------------------- */
+	/**------------------------------ BeginPlay ------------------------------- **/
 protected:
 	virtual void BeginPlay() override;
-	/* ------------------------------ Tick event (3) ------------------------------- */
-public:	
+	/**------------------------------ Tick event ------------------------------- **/
+public:
 	virtual void Tick(float DeltaTime) override;
 
-	/* ------------------------------ Enhanced Input setup function (4) ------------------------------- */
+	/**------------------------------ Enhanced Input setup function ------------------------------- **/
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	/* ------------------------------ Interaction Component block ------------------------------- */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	UInteractionComponent* InteractionComponent;
-
-	// (4.1) handles InteractionComponent behavior on started action
-	void OnIA_InteractStarted();
-
-	// (4.2) handles InteractionComponent on ongoing action
-	void OnIA_InteractOngoing(const FInputActionInstance& Instance);
-
-	// (4.3) handles InteractionComponent behavior on completed action
-	void OnIA_InteractCompleted();
-	
-	/* ------------------------------ IA Handle functions block ------------------------------- */
+	/**----------- IA Handle functions block ----------- **/
 protected:
-
-	// MoveAction handler (5)
+	// MoveAction handler
 	UFUNCTION()
 	void Move(const FInputActionValue& Value);
 
-	// LookAction handler (6)
+	// LookAction handler
 	UFUNCTION()
 	void Look(const FInputActionValue& Value);
 
-	// InteractAction handler (7)
+	// InteractAction handler
 	void Jump();
+
+private:
+	/**------------------------------ Custom Components block ------------------------------- **/
+	/** ----------- Interaction component ----------- **/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UInteractionComponent* InteractionComponent;
+
+public:
+	// handles InteractionComponent behavior on started action
+	void OnIA_InteractStarted();
+
+	// handles InteractionComponent on ongoing action
+	void OnIA_InteractOngoing(const FInputActionInstance& Instance);
+
+	// handles InteractionComponent behavior on completed action
+	void OnIA_InteractCompleted();
+
+	/** ----------- Inventory component ----------- **/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UInventoryComponent* InventoryComponent;
+
+	UInventoryComponent* GetInventoryComponent() const;
 };
