@@ -12,7 +12,7 @@
 class UInventoryComponent;
 /**------------------------------ Class Definition ------------------------------- **/
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI, Blueprintable)
+UINTERFACE(MinimalAPI)
 class UInteractable : public UInterface
 {
 	GENERATED_BODY()

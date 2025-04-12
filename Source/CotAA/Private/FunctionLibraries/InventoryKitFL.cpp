@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "InteractionSystem/BP_InventoryKitFL.h"
+#include "FunctionLibraries/InventoryKitFL.h"
 
-UInventoryComponent* UBP_InventoryKitFL::GetInventoryComponent(const UObject* WorldContextObject)
+UInventoryComponent* UInventoryKitFL::GetInventoryComponent(const UObject* WorldContextObject)
 {
 	if (!WorldContextObject)
 	{
@@ -48,7 +48,7 @@ UInventoryComponent* UBP_InventoryKitFL::GetInventoryComponent(const UObject* Wo
 	return InventoryComponent;
 }
 
-FItemMasterInfo UBP_InventoryKitFL::GetInventoryItemInfo(const FInventoryItem& InventoryItem)
+FItemMasterInfo UInventoryKitFL::GetInventoryItemInfo(const FInventoryItem& InventoryItem)
 {
 	FItemMasterInfo ItemInfo;
 	

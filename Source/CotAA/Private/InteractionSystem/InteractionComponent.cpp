@@ -26,7 +26,7 @@ UInteractionComponent::UInteractionComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	ConstructorHelpers::FClassFinder<UUserWidget> WBP_Interaction_ClassFinder(
-		TEXT("/Game/Player/UI/WBP_InteractionHint"));
+		TEXT("/Game/UI/Inventory_Interactions/WBP_InteractionHint"));
 
 	if (WBP_Interaction_ClassFinder.Succeeded())
 	{

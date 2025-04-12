@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "InventoryComponent.h"
+#include "InteractionSystem/InventoryComponent.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Structs/Items/InventoryItem.h"
 #include "Structs/Items/ItemMasterInfo.h"
-#include "BP_InventoryKitFL.generated.h"
+#include "InventoryKitFL.generated.h"
 
 /**
  * Blueprint function library to work with inventory component
@@ -31,7 +31,7 @@ struct FHasItemReturnStruct
 };
 
 UCLASS()
-class COTAA_API UBP_InventoryKitFL : public UBlueprintFunctionLibrary
+class COTAA_API UInventoryKitFL : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 
@@ -42,4 +42,5 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	static FItemMasterInfo GetInventoryItemInfo(const FInventoryItem& InventoryItem);
+	
 };
