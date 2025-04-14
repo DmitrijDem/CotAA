@@ -23,7 +23,7 @@ class UInteractable : public UInterface
 /**
  * Interactable Component Interface. Receives calls from an Interactor component
  **/
-class COTAA_API IInteractable
+class COTAADEV_API IInteractable
 {
 	GENERATED_BODY()
 

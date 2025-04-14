@@ -31,7 +31,7 @@ struct FHasItemReturnStruct
 };
 
 UCLASS()
-class COTAA_API UInventoryKitFL : public UBlueprintFunctionLibrary
+class COTAADEV_API UInventoryKitFL : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 

@@ -13,7 +13,7 @@
  * ItemDataTable - info about item itself, unique for each item: gear, potion_materials, trade_goods, etc.
  */
 USTRUCT(BlueprintType)
-struct COTAA_API FItemMasterInfo : public FTableRowBase
+struct COTAADEV_API FItemMasterInfo : public FTableRowBase
 {
 	GENERATED_BODY()
 

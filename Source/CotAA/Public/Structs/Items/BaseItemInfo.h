@@ -10,7 +10,7 @@
  * Struct to describe RarityChance of the item
  */
 USTRUCT(BlueprintType)
-struct COTAA_API FBaseItemInfo
+struct COTAADEV_API FBaseItemInfo
 {
 	GENERATED_BODY()
 

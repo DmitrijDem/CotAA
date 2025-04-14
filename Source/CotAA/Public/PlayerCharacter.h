@@ -15,7 +15,7 @@ class UInventoryComponent;
 /**------------------------------ Forward declaration block end------------------------------- **/
 
 UCLASS()
-class COTAA_API APlayerCharacter : public ACharacter
+class COTAADEV_API APlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
