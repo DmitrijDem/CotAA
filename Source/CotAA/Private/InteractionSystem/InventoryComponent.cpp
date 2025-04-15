@@ -9,6 +9,13 @@ UInventoryComponent::UInventoryComponent()
 
 }
 
+void UInventoryComponent::BeginPlay()
+{
+	Super::BeginPlay();
+
+	
+}
+
 void UInventoryComponent::AddItem(FDataTableRowHandle ItemInfo)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, "Adding item");

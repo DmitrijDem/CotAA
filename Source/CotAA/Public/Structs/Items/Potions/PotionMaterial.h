@@ -28,4 +28,10 @@ struct FPotionMaterial : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Alchemy")
 	bool AdditionalRequirementsToUse = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Master Info")
+	int Amount;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Master Info")
+	int ValueAsCoin;
 };

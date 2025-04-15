@@ -3,6 +3,8 @@
 
 #include "FunctionLibraries/InventoryKitFL.h"
 
+#include "Structs/Items/PotionMaterials/PotionMaterialMasterInfo.h"
+
 UInventoryComponent* UInventoryKitFL::GetInventoryComponent(const UObject* WorldContextObject)
 {
 	if (!WorldContextObject)
@@ -80,6 +82,20 @@ FItemMasterInfo UInventoryKitFL::GetInventoryItemInfo(const FInventoryItem& Inve
 			*InventoryItem.MasterItemDataTable.RowName.ToString(),
 			*InventoryItem.MasterItemDataTable.DataTable->GetName());
 	}
+
+	return ItemInfo;
+}
+
+FTradeGoodMasterInfo UInventoryKitFL::GetItemInfoAsTradeGoods(FItemMasterInfo InventoryItem)
+{
+	FTradeGoodMasterInfo ItemInfo;
+	
+	return ItemInfo;
+}
+
+FPotionMaterialMasterInfo UInventoryKitFL::GetItemInfoAsPotionMaterial(FItemMasterInfo InventoryItem)
+{
+	FPotionMaterialMasterInfo ItemInfo;
 
 	return ItemInfo;
 }

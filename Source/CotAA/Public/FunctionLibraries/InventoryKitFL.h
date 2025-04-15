@@ -7,6 +7,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "Structs/Items/InventoryItem.h"
 #include "Structs/Items/ItemMasterInfo.h"
+#include "Structs/Items/Potions/PotionMaterial.h"
+#include "Structs/Items/TradeGoods/TradeGoodMasterInfo.h"
 #include "InventoryKitFL.generated.h"
 
 /**
@@ -42,5 +44,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	static FItemMasterInfo GetInventoryItemInfo(const FInventoryItem& InventoryItem);
-	
+
+	UFUNCTION(BlueprintCallable)
+	static FTradeGoodMasterInfo GetItemInfoAsTradeGoods(FItemMasterInfo InventoryItem);
+
+	UFUNCTION(BlueprintCallable)
+	static FPotionMaterialMasterInfo GetItemInfoAsPotionMaterial(FItemMasterInfo InventoryItem);
 };
