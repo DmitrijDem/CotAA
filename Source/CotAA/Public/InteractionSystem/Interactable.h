@@ -30,23 +30,23 @@ class COTAADEV_API IInteractable
 
 public:
 	// Interaction method. Should be called only by an Interactor  when input action, once.
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction System handlig")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Interaction System handlig")
 	void Interact(AActor* Interactor);
 
 	// Function I created in case I need to separate interactions
 	// Interaction method for loot. Should be called only by an Interactor when input action, once.
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interaction System handlig")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Interaction System handlig")
 	void InteractLootable(AActor* Interactor);
 
 	// Returns EInteractableType to tell which interaction type is needed to interact with object
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactable properties")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Interactable properties")
 	EInteractableType GetInteractionType();
 
 	// Returns EInteractWith to tell WHAT player interacts (NPC, loot, container, etc.)
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactable properties")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Interactable properties")
 	EInteractionWith GetInteractWith();
 	
 	// Returns EInteractableType to tell which interaction type is needed to interact with object
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Interactable properties")
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Interactable properties")
 	float GetHoldDuration();
 };

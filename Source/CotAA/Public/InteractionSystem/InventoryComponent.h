@@ -25,7 +25,7 @@ public:
 	int32 ItemCount = -1;
 };
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class COTAADEV_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -42,7 +42,7 @@ public:
 
 	// Array of items on player's base ("inside his camp, village")
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<FInventoryItem> GlobalInventory;
+	TArray<FInventoryItem> CampInventory;
 
 	// Hot bar map
 	// Key = "button on keyboard"
@@ -57,8 +57,17 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
+	// BlueprintNativeEvent - custom event with default implementation function, which can be overriden inside Blueprints
+	
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Default")
 	void ReOrganizeInventory();
+
+	virtual void ReOrganizeInventory_Implementation();
+		
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category="Default")
+	void OnInventoryOpened();
+
+	virtual void OnInventoryOpened_Implementation();
 	
 	UFUNCTION(BlueprintCallable)
 	void AddItem(FDataTableRowHandle ItemInfo);
@@ -71,4 +80,10 @@ public:
 
 	UFUNCTION(BLueprintPure)
 	static bool CompareDataTables(const FDataTableRowHandle& DataTable, const FDataTableRowHandle& CompareWith);
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FInventoryItem> RequestBackpackItems();
+
+	UFUNCTION(BlueprintCallable)
+	TArray<FInventoryItem> RequestCampItems();
 };

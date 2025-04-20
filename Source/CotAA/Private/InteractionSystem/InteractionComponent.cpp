@@ -40,28 +40,34 @@ void UInteractionComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
+	AActor* OwnerPawn = GetOwner();
+	if (!OwnerPawn) return;
+	
 	// Setting capsule component for interactions
-	if (UCapsuleComponent* CapsuleComponent = Cast<ACharacter>(Owner)->GetCapsuleComponent())
+	if (ACharacter* OwnerChar = Cast<ACharacter>(OwnerPawn))
 	{
-		// This set-ups Interactor capsule component
-		CapsuleComponent->OnComponentBeginOverlap.AddDynamic(
-			this, &UInteractionComponent::HandleCapsuleComponentOverlapBegin);
-		CapsuleComponent->OnComponentEndOverlap.AddDynamic(
-			this, &UInteractionComponent::HandleCapsuleComponentOverlapEnd);
-
-		if (!InteractionWidgetComponent)
+		if (UCapsuleComponent* CapsuleComponent = Cast<ACharacter>(OwnerChar)->GetCapsuleComponent())
 		{
-			// Widget component creation
-			InteractionWidgetComponent = NewObject<UWidgetComponent>(this, UWidgetComponent::StaticClass(),
-			                                                         TEXT("InteractionWidgetComponent"), RF_Transient);
-			// Registration
-			InteractionWidgetComponent->RegisterComponent();
-			// ManualAttachment = true
-			InteractionWidgetComponent->SetupAttachment(nullptr);
-			// Using player screen to show widget
-			InteractionWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
-			// Widget size (actually, it's pretty small for 1920x1080 - adjust it)
-			InteractionWidgetComponent->SetDrawSize(FVector2D(250, 30));
+			// This set-ups Interactor capsule component
+			CapsuleComponent->OnComponentBeginOverlap.AddDynamic(
+				this, &UInteractionComponent::HandleCapsuleComponentOverlapBegin);
+			CapsuleComponent->OnComponentEndOverlap.AddDynamic(
+				this, &UInteractionComponent::HandleCapsuleComponentOverlapEnd);
+
+			if (!InteractionWidgetComponent)
+			{
+				// Widget component creation
+				InteractionWidgetComponent = NewObject<UWidgetComponent>(this, UWidgetComponent::StaticClass(),
+																		 TEXT("InteractionWidgetComponent"), RF_Transient);
+				// Registration
+				InteractionWidgetComponent->RegisterComponent();
+				// ManualAttachment = true
+				InteractionWidgetComponent->SetupAttachment(nullptr);
+				// Using player screen to show widget
+				InteractionWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
+				// Widget size (actually, it's pretty small for 1920x1080 - adjust it)
+				InteractionWidgetComponent->SetDrawSize(FVector2D(250, 30));
+			}
 		}
 	}
 }

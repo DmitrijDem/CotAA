@@ -16,7 +16,7 @@ struct FInventoryItem
 public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName = "Editable Info")
-	FItemEditableInfo InventoryItem;
+	FItemEditableInfo EditableInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName = "Master Item Data Table")
 	FDataTableRowHandle MasterItemDataTable;

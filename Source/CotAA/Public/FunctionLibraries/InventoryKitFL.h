@@ -32,7 +32,7 @@ struct FHasItemReturnStruct
 	
 };
 
-UCLASS()
+UCLASS(Blueprintable)
 class COTAADEV_API UInventoryKitFL : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
@@ -50,4 +50,13 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	static FPotionMaterialMasterInfo GetItemInfoAsPotionMaterial(FItemMasterInfo InventoryItem);
+
+	UFUNCTION(BlueprintCallable)
+	static TArray<FInventoryItem>SortItemsByRarity(TArray<FInventoryItem> InventoryItems, bool FromRarest);
+
+	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
+	static TArray<FInventoryItem>GetBackpackInventoryItems(const UObject* WorldContextObject);
+
+	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
+	static TArray<FInventoryItem>GetCampInventoryItems(const UObject* WorldContextObject);
 };

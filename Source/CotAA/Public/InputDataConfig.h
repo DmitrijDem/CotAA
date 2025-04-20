@@ -28,4 +28,7 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
 	class UInputAction* IA_Interact;
+
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
+	class UInputAction* IA_OpenInventory;
 };

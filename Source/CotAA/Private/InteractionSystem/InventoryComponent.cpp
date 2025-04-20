@@ -2,6 +2,8 @@
 
 
 #include "InteractionSystem/InventoryComponent.h"
+
+#include "FunctionLibraries/InventoryKitFL.h"
 #include "./Structs/Items/InventoryItem.h"
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent()
@@ -13,7 +15,21 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	ReOrganizeInventory();
+}
+
+void UInventoryComponent::ReOrganizeInventory_Implementation()
+{
+	// Sorting items from rarest for local inventory
+	LocalInventory = UInventoryKitFL::SortItemsByRarity(LocalInventory, true);
+
+	// Sorting items from rarest for "camp" inventory
+	CampInventory = UInventoryKitFL::SortItemsByRarity(CampInventory, true);
+}
+
+void UInventoryComponent::OnInventoryOpened_Implementation()
+{
+	ReOrganizeInventory();
 }
 
 void UInventoryComponent::AddItem(FDataTableRowHandle ItemInfo)
@@ -59,4 +75,14 @@ FHasItem UInventoryComponent::HasItem(FDataTableRowHandle ItemDataTable)
 bool UInventoryComponent::CompareDataTables(const FDataTableRowHandle& DataTable, const FDataTableRowHandle& CompareWith)
 {
 	return ((DataTable.DataTable == CompareWith.DataTable) && (DataTable.RowName == CompareWith.RowName));
+}
+
+TArray<FInventoryItem> UInventoryComponent::RequestBackpackItems()
+{
+	return LocalInventory;
+}
+
+TArray<FInventoryItem> UInventoryComponent::RequestCampItems()
+{
+	return CampInventory;
 }

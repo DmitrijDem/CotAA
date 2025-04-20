@@ -2,8 +2,8 @@
 
 
 #include "FunctionLibraries/InventoryKitFL.h"
-
 #include "Structs/Items/PotionMaterials/PotionMaterialMasterInfo.h"
+#include "Tests/AutomationCommon.h"
 
 UInventoryComponent* UInventoryKitFL::GetInventoryComponent(const UObject* WorldContextObject)
 {
@@ -98,4 +98,73 @@ FPotionMaterialMasterInfo UInventoryKitFL::GetItemInfoAsPotionMaterial(FItemMast
 	FPotionMaterialMasterInfo ItemInfo;
 
 	return ItemInfo;
+}
+
+TArray<FInventoryItem> UInventoryKitFL::SortItemsByRarity(TArray<FInventoryItem> InventoryItems, bool FromRarest)
+{
+	if (InventoryItems.Num() != 0)
+	{
+		int LocLastIndex = InventoryItems.Num() - 1;
+		int LocCurrentIndex = 0;
+		int LocCurrentInt = 0;
+
+		for (auto InventoryItem : InventoryItems)
+		{
+			for (int i = 0; i < LocLastIndex; i++)
+			{
+				LocCurrentIndex = i;
+
+				FInventoryItem CurrentInventoryItem = InventoryItems[i];
+
+				if (LocLastIndex > 0)
+				{
+					LocCurrentInt = FMath::Clamp(LocCurrentInt + 1, 0, LocLastIndex);
+				}
+				else
+				{
+					LocCurrentInt = 0;
+				}
+
+				FInventoryItem NextInventoryItem = InventoryItems[LocCurrentInt];
+
+				LocCurrentInt = static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(CurrentInventoryItem).BaseItemInfo.ItemRarity);
+
+				// if true = sorting from the lowest rarity, if false = sorting from the highest rarity
+				// Analog of Select and branch after it
+				if (FromRarest ? LocCurrentInt < static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(NextInventoryItem).BaseItemInfo.ItemRarity)
+				: LocCurrentInt > static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(NextInventoryItem).BaseItemInfo.ItemRarity))
+				{
+					Swap(InventoryItems[LocCurrentIndex], InventoryItems[LocLastIndex + 1]);
+				}
+			}
+			LocLastIndex = LocLastIndex--;
+		}
+	}
+	return InventoryItems;
+}
+
+TArray<FInventoryItem> UInventoryKitFL::GetBackpackInventoryItems(const UObject* WorldContextObject)
+{
+	UInventoryComponent* InventoryComponent = UInventoryKitFL::GetInventoryComponent(WorldContextObject);
+	TArray<FInventoryItem> InventoryItems;
+	
+	if (IsValid(InventoryComponent))
+	{
+		InventoryItems = InventoryComponent->RequestBackpackItems();
+		return InventoryItems;
+	}
+	return InventoryItems;
+}
+
+TArray<FInventoryItem> UInventoryKitFL::GetCampInventoryItems(const UObject* WorldContextObject)
+{
+	UInventoryComponent* InventoryComponent = UInventoryKitFL::GetInventoryComponent(WorldContextObject);
+	TArray<FInventoryItem> InventoryItems;
+	
+	if (IsValid(InventoryComponent))
+	{
+		InventoryItems = InventoryComponent->RequestCampItems();
+		return InventoryItems;
+	}
+	return InventoryItems;
 }
