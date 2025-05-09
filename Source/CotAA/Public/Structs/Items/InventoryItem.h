@@ -15,6 +15,22 @@ struct FInventoryItem
 
 public:
 
+	FInventoryItem()
+	: EditableInfo(), MasterItemDataTable()
+	{};
+	
+	FInventoryItem(const FDataTableRowHandle& pMasterItemDT)
+	: EditableInfo(), MasterItemDataTable(pMasterItemDT)
+	{};
+	
+	FInventoryItem(const FItemEditableInfo& pEditableInfo)
+	: EditableInfo(pEditableInfo), MasterItemDataTable()
+	{};
+	
+	FInventoryItem(const FDataTableRowHandle& pMasterItemDT, const FItemEditableInfo& pEditableInfo) 
+	: EditableInfo(pEditableInfo), MasterItemDataTable(pMasterItemDT) 
+	{}
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName = "Editable Info")
 	FItemEditableInfo EditableInfo;
 

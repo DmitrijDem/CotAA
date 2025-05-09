@@ -10,6 +10,8 @@
 #include "GameFramework/Character.h"
 #include "InteractionSystem/InteractionComponent.h"
 #include "Misc/OutputDeviceNull.h"
+#include "Enums/UI/InGameMenu.h"
+#include "Framework/GameInstanceInterface.h"
 
 AGamePlayerController::AGamePlayerController()
 {
@@ -138,10 +140,5 @@ void AGamePlayerController::OnIA_InteractCompleted()
 
 void AGamePlayerController::OnIA_OpenInventory()
 {
-	UGameInstance* GameInstance = GetGameInstance();
-
-	if (GetPawn())
-	{
-		UE_LOG(LogTemp, Display, TEXT("On IA Open Inventory"));
-	}
+	IGameInstanceInterface::Execute_ToggleInGameMenu(GetGameInstance(), EInGameMenu::Inventory);
 }

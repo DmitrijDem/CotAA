@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Enums/UI/InGameMenu.h"
 #include "UObject/Interface.h"
 #include "PlayerControllerInterface.generated.h"
 
@@ -21,8 +22,5 @@ class COTAADEV_API IPlayerControllerInterface
 	GENERATED_BODY()
 
 public:
-
-	// Returns EInteractWith to tell WHAT player interacts (NPC, loot, container, etc.)
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Interactable properties")
-	void ToggleInGameMenu();
+	
 };

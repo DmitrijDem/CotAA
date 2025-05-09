@@ -18,6 +18,9 @@ struct FItemEditableInfo
 
 public:
 
+	FItemEditableInfo() {};
+	FItemEditableInfo(int pAmount) : Amount(pAmount) {};
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName = "Is Selected Gear?")
 	bool bIsSelected = false;
 

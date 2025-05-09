@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryType.h"
 #include "Components/ActorComponent.h"
 #include "Structs/Items/InventoryItem.h"
 #include "InventoryComponent.generated.h"
@@ -22,7 +23,7 @@ public:
 	FInventoryItem InventoryItem;
 
 	UPROPERTY(BlueprintReadWrite)
-	int32 ItemCount = -1;
+	int32 Index = -1;
 };
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -70,20 +71,17 @@ public:
 	virtual void OnInventoryOpened_Implementation();
 	
 	UFUNCTION(BlueprintCallable)
-	void AddItem(FDataTableRowHandle ItemInfo);
+	void AddItem(FDataTableRowHandle ItemInfo, EInventoryType TargetInventory);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItem(FDataTableRowHandle ItemInfo, int Amount);
 
 	UFUNCTION(BlueprintPure)
-	FHasItem HasItem( FDataTableRowHandle ItemDataTable);
+	FHasItem HasItem(EInventoryType TargetInventory, const FDataTableRowHandle& ItemDataTable);
 
 	UFUNCTION(BLueprintPure)
 	static bool CompareDataTables(const FDataTableRowHandle& DataTable, const FDataTableRowHandle& CompareWith);
 
 	UFUNCTION(BlueprintCallable)
-	TArray<FInventoryItem> RequestBackpackItems();
-
-	UFUNCTION(BlueprintCallable)
-	TArray<FInventoryItem> RequestCampItems();
+	TArray<FInventoryItem>& RequestInventoryArray(EInventoryType TargetInventory);
 };

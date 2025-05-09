@@ -66,7 +66,7 @@ void UInteractionComponent::BeginPlay()
 				// Using player screen to show widget
 				InteractionWidgetComponent->SetWidgetSpace(EWidgetSpace::Screen);
 				// Widget size (actually, it's pretty small for 1920x1080 - adjust it)
-				InteractionWidgetComponent->SetDrawSize(FVector2D(250, 30));
+				InteractionWidgetComponent->SetDrawSize(FVector2D(100, 100));
 			}
 		}
 	}
@@ -158,8 +158,8 @@ void UInteractionComponent::RequestInteraction()
 		{
 			// Find which type interactable has (/Interactable.h - UEnum)
 			// Depending on type
-			// Press - interact with interactable immediatly
-			// Hold - wait untill dispatcher event fires and then interact
+			// Press - interact with interactable immediately
+			// Hold - wait until dispatcher event fires and then interact
 			switch (IInteractable::Execute_GetInteractionType(InteractableActor))
 			{
 			case(EInteractableType::Press):

@@ -12,8 +12,8 @@
 UENUM(BlueprintType)
 enum class EInGameMenu : uint8
 {
-	Inventory UMETA(DisplayName = "Inventory"),
-	Quests UMETA(DisplayName = "Quests"),
 	WorldMap UMETA(DisplayName = "World Map"),
+	Quests UMETA(DisplayName = "Quests"),
+	Inventory UMETA(DisplayName = "Inventory"),
 	Skills UMETA(DisplayName = "Skills"),
 };

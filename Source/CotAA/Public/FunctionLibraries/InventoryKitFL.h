@@ -42,21 +42,21 @@ public:
 	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
 	static UInventoryComponent* GetInventoryComponent(const UObject* WorldContextObject);
 
+	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
+	static APlayerCharacter* GetPlayerCharacter(const UObject* WorldContextObject);
+
 	UFUNCTION(BlueprintCallable)
-	static FItemMasterInfo GetInventoryItemInfo(const FInventoryItem& InventoryItem);
+	static FItemMasterInfo GetInventoryItemInfo(FInventoryItem InventoryItem);
 
 	UFUNCTION(BlueprintCallable)
 	static FTradeGoodMasterInfo GetItemInfoAsTradeGoods(FItemMasterInfo InventoryItem);
 
 	UFUNCTION(BlueprintCallable)
-	static FPotionMaterialMasterInfo GetItemInfoAsPotionMaterial(FItemMasterInfo InventoryItem);
+	static FPotionMaterial GetItemInfoAsPotionMaterial(const FItemMasterInfo& InventoryItem);
 
 	UFUNCTION(BlueprintCallable)
 	static TArray<FInventoryItem>SortItemsByRarity(TArray<FInventoryItem> InventoryItems, bool FromRarest);
-
+	
 	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
-	static TArray<FInventoryItem>GetBackpackInventoryItems(const UObject* WorldContextObject);
-
-	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
-	static TArray<FInventoryItem>GetCampInventoryItems(const UObject* WorldContextObject);
+	static TArray<FInventoryItem>GetInventoryItems(const UObject* WorldContextObject, EInventoryType TargetInventory);
 };
