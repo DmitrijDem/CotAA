@@ -237,7 +237,6 @@ void UInteractionComponent::HandleCapsuleComponentOverlapBegin(UPrimitiveCompone
 {
 	if (OtherActor && OtherActor->Implements<UInteractable>())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Yellow, TEXT("Added Interactable actor to interaction array"));
 		InteractablesInRange.AddUnique(OtherActor);
 		RenderInteractionWidget();
 	}
@@ -254,7 +253,6 @@ void UInteractionComponent::HandleCapsuleComponentOverlapEnd(UPrimitiveComponent
 {
 	if (OtherActor && OtherActor->Implements<UInteractable>())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 0.5f, FColor::Yellow, TEXT("Removed interactable actor from array"));
 		InteractablesInRange.Remove(OtherActor);
 		RenderInteractionWidget();
 	}

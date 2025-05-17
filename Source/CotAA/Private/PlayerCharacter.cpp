@@ -11,6 +11,7 @@
 /* ------------------------------ Custom Libraries------------------------------- */
 #include "InteractionSystem/InteractionComponent.h"
 #include "InteractionSystem/InventoryComponent.h"
+
 /* ------------------------------ Constructor ------------------------------- */
 APlayerCharacter::APlayerCharacter()
 {
@@ -20,28 +21,9 @@ APlayerCharacter::APlayerCharacter()
 	RootComponent = GetCapsuleComponent();
 
 	// Setting up spring arm and camera 
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
-	SpringArm->SetupAttachment(RootComponent);
-	SpringArm->TargetArmLength = 150.0f;
-	SpringArm->SocketOffset = FVector(0.0f, 55.0f, 60.0f);
-	SpringArm->bUsePawnControlRotation = true;
-	SpringArm->bInheritPitch = true;
-	SpringArm->bInheritYaw = true;
-	SpringArm->bInheritRoll = false;
-
-	SpringArm->bEnableCameraLag = true;
-	SpringArm->CameraLagSpeed = 5.0f;
-
-	SpringArm->CameraLagMaxDistance = 100.0f;
-
-	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
-	Camera->SetupAttachment(SpringArm);
-
-	bUseControllerRotationYaw = false;
-	GetCharacterMovement()->bOrientRotationToMovement = true;
-
+	ConfigureCamera();
+	
 	// Setting capsule component for interactions
-
 	UCapsuleComponent* CapsuleComp = GetCapsuleComponent();
 
 	// Interaction Component
@@ -49,7 +31,34 @@ APlayerCharacter::APlayerCharacter()
 
 	// Inventory Component
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("InventoryComponent");
+
+	// PlayerStats Component
+	PlayerStatsComponent = CreateDefaultSubobject<UPlayerStatsComponent>("PlayerStatsComponent");
 }
+
+void APlayerCharacter::ConfigureCamera()
+{
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArm");
+	SpringArm->SetupAttachment(RootComponent);
+	SpringArm->TargetArmLength = 300.f;
+	
+	SpringArm->bUsePawnControlRotation = true;
+	SpringArm->SocketOffset = FVector(0.0f, 50.0f, 50.0f);
+	SpringArm->bEnableCameraLag = true;
+	SpringArm->CameraLagSpeed = 8.0f;
+	SpringArm->bDoCollisionTest = false;
+
+	SpringArm->CameraLagMaxDistance = 100.0f;
+	
+	GetCharacterMovement()->bOrientRotationToMovement = false;
+	bUseControllerRotationYaw = true;
+	GetCharacterMovement()->bUseControllerDesiredRotation = true;
+
+	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
+	Camera->SetupAttachment(SpringArm);
+	Camera->SetFieldOfView(85.f);
+}
+
 
 /* ------------------------------ BeginPlay ------------------------------- */
 void APlayerCharacter::BeginPlay()
@@ -62,16 +71,6 @@ void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-}
-
-UInventoryComponent* APlayerCharacter::GetInventoryComponent() const
-{
-	if (InventoryComponent)
-	{
-		return Cast<UInventoryComponent>(GetComponentByClass(UInventoryComponent::StaticClass()));
-	}
-
-	return nullptr;
 }
 
 UInteractionComponent* APlayerCharacter::GetInteractionComponent() const

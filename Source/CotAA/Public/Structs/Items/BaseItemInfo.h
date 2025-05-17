@@ -21,7 +21,8 @@ struct COTAADEV_API FBaseItemInfo
 		, Name(FText::GetEmpty())
 		, Description(FText::GetEmpty())
 		, RequiredLevel(0)
-		, Icon(nullptr)
+		, InventoryIcon(nullptr)
+		, PickupMesh(nullptr)
 	{}
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Rarity")
@@ -37,5 +38,8 @@ struct COTAADEV_API FBaseItemInfo
 	int RequiredLevel;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Icon")
-	TObjectPtr<UTexture2D> Icon = nullptr;
+	TObjectPtr<UTexture2D> InventoryIcon = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Icon")
+	TObjectPtr<UStaticMesh> PickupMesh = nullptr;
 };

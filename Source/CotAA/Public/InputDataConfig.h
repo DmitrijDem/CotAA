@@ -17,18 +17,24 @@ class COTAADEV_API UInputDataConfig : public UDataAsset
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Movement")
 	class UInputAction* IA_Move;
 
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Movement")
 	class UInputAction* IA_Look;
 
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Movement")
 	class UInputAction* IA_Jump;
 	
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Interaction")
 	class UInputAction* IA_Interact;
 
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Inventory")
 	class UInputAction* IA_OpenInventory;
+
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Movement")
+	class UInputAction* IA_RunSprint;
+	
+	UPROPERTY(EditAnywhere, Category = "EnhancedInput|Battle")
+	class UInputAction* IA_Dodge;
 };

@@ -29,17 +29,17 @@ UInventoryComponent* UInventoryKitFL::GetInventoryComponent(const UObject* World
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController not found!"));
 		return nullptr;
 	}
-	
-	if (!PC->IsLocalController() || !PC->IsLocalPlayerController())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Controller is not local!"));
-		return nullptr;
-	}
 
 	APawn* ControlledPawn = PC->GetPawn();
 	if (!ControlledPawn)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("ControlledPawn is null!"));
+		return nullptr;
+	}
+	
+	if (!PC->IsLocalController() || !PC->IsLocalPlayerController())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Controller is not local!"));
 		return nullptr;
 	}
 	
@@ -196,4 +196,49 @@ TArray<FInventoryItem> UInventoryKitFL::GetInventoryItems(const UObject* WorldCo
 		return InventoryItems;
 	}
 	return InventoryItems;
+}
+
+UPlayerStatsComponent* UInventoryKitFL::GetPlayerStatsComponent(const UObject* WorldContextObject)
+{
+	if (!WorldContextObject) 
+	{
+		UE_LOG(LogTemp, Error, TEXT("Invalid World Context Object!"));
+		return nullptr;
+	}
+
+	UWorld* World = WorldContextObject->GetWorld();
+	if (!World)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Failed to get World!"));
+		return nullptr;
+	}
+	
+	APlayerController* PC = UGameplayStatics::GetPlayerController(World, 0);
+	if (!PC)
+	{
+		UE_LOG(LogTemp, Error, TEXT("Player Controller not found!"));
+		return nullptr;
+	}
+
+	APawn* ControlledPawn = PC->GetPawn();
+	if (!ControlledPawn)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ControlledPawn is null!"));
+		return nullptr;
+	}
+	
+	if (!PC->IsLocalController() || !PC->IsLocalPlayerController())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Controller is not local!"));
+		return nullptr;
+	}
+	
+	UPlayerStatsComponent* PlayerStatsComponent = ControlledPawn->FindComponentByClass<UPlayerStatsComponent>();
+	if (!PlayerStatsComponent)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("InventoryComponent not found on Pawn!"));
+		return nullptr;
+	}
+
+	return PlayerStatsComponent;	
 }

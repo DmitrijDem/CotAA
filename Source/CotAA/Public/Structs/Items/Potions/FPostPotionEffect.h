@@ -10,20 +10,36 @@
 /**
  * 
  */
-USTRUCT(BlueprintType)
 
+UENUM(BlueprintType)
+enum class EComparisonOperator : uint8
+{
+ None,
+ Equal,
+ GreaterThan,
+ GreaterThanOrEqual,
+ LowerThan,
+ LessThanOrEqual,
+ NotEqual,
+};
+
+USTRUCT(BlueprintType)
 struct FPostPotionEffect
 {
  GENERATED_BODY()
 
 public:
- UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects")
- EPotionEffectType EffectType;
-
- // Requirement values (for example, FireResistance > 50)
- UPROPERTY(EditAnywhere)
- TMap<EPotionEffectType, float> Thresholds;;
 
  UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects")
  FBasePotionEffect Effect;
+
+ // Requirement values (for example, FireResistance > 50)
+ UPROPERTY(EditAnywhere)
+ TMap<EPotionEffectType, float> Thresholds;
+ 
+ UPROPERTY(EditAnywhere)
+ TMap<EPotionEffectType, EComparisonOperator> Operator;
+
+ UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects")
+ bool bIsDiscovered = false;
 };

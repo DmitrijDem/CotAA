@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputDataConfig.h"
+#include "PlayerStats/PlayerStatsComponent.h"
 #include "PlayerCharacter.generated.h"
 
 /**------------------------------ Forward declaration block begin------------------------------- **/
@@ -21,15 +22,19 @@ class COTAADEV_API APlayerCharacter : public ACharacter
 protected:
 	/**------------------------------ Components block------------------------------- **/
 
-	UPROPERTY(VisibleAnywhere, Category = "EnhancedInput")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class USpringArmComponent* SpringArm;
 
-	UPROPERTY(VisibleAnywhere, Category = "EnhancedInput")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCameraComponent* Camera;
+		
 	/**------------------------------ Constructor ------------------------------- **/
 public:
 	APlayerCharacter();
 
+	// setup functions
+	void ConfigureCamera();
+	
 	/**------------------------------ BeginPlay ------------------------------- **/
 protected:
 	virtual void BeginPlay() override;
@@ -47,8 +52,14 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UInventoryComponent* InventoryComponent;
 
+	/** ----------- PlayerStats component  ----------- **/
+	// handles HP, stamina, resistances, perks etc.
+	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPlayerStatsComponent* PlayerStatsComponent;
+	
 public:
 	UInventoryComponent* GetInventoryComponent() const;
 
 	UInteractionComponent* GetInteractionComponent() const;
+	
 };

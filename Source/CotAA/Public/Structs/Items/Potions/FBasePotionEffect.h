@@ -20,9 +20,13 @@ public:
 	EPotionEffectType EffectType;
 
 	// Power of the effect in "anything" (healing 50 - 50 HP, FireDamage 30 - 30 HP/Sec, Speed 1.2 - 120% etc.) !!! Might be changed
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects", meta=(Tooltip="Effect power measured in units of the effect, Healing - HP, Regeneration - HP/S, etc."))
 	float Power = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects")
 	float Duration = 10.0f;
+
+	// Player discovered the effect?
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Potion Effects")
+	bool bIsDiscovered = false;
 };

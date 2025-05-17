@@ -4,70 +4,70 @@
 
 #include "CoreMinimal.h"
 
-UENUM(BlueprintType, meta=(BitFlags))
+UENUM(BlueprintType)
 enum class EPotionEffectType : uint8
 {
     // ========================
-    // Default
+    // Core Effects
     // ========================
-    None          UMETA(DisplayName = "None"),
-	
-	// ========================
-	// Positive Effects 
-	// ========================
-	Healing             UMETA(DisplayName = "Healing"),
-	Regeneration        UMETA(DisplayName = "Regeneration"),
-	StaminaRestore      UMETA(DisplayName = "Stamina Restore"),
-	StaminaRegeneration UMETA(DisplayName = "Stamina Regeneration"),
+    None                UMETA(DisplayName = "None"),
 
-	// Resistances
-	PhysicalResistance  UMETA(DisplayName = "Physical Resistance"),  // Might be separated ("Skyrim" - oak and stone skin)
+    // ========================
+    // Primary Effects 
+    // ========================
+    // Healing & Stamina
+    Healing             UMETA(DisplayName = "Healing"),
+    Regeneration        UMETA(DisplayName = "Regeneration"),
+    StaminaRestore      UMETA(DisplayName = "Stamina Restore"),
+    StaminaRegeneration UMETA(DisplayName = "Stamina Regeneration"),
+
+    // Damage Types
+    FireDamage          UMETA(DisplayName = "Fire Damage"),
+   FrostDamage         UMETA(DisplayName = "Frost Damage"),
+   PoisonDamage        UMETA(DisplayName = "Poison Damage"),
+   LightningDamage     UMETA(DisplayName = "Lightning Damage"),
+   BloodDamage         UMETA(DisplayName = "Blood Damage"),
+   PsychicDamage       UMETA(DisplayName = "Psychic Damage"),
+   NecroticDamage      UMETA(DisplayName = "Necrotic Damage"),
+   PhysicalDamage      UMETA(DisplayName = "Physical Damage"),
+   AcidDamage          UMETA(DisplayName = "Acid Damage"), 
+   LightDamage          UMETA(DisplayName = "Light Damage"),
+   DarkDamage          UMETA(DisplayName = "Dark Damage"),
+   ChaosDamage         UMETA(DisplayName = "Chaos Damage"),
+
+	Bleeding            UMETA(DisplayName = "Bleeding Damage"),
+
+    // ========================
+    // Defense Modifiers 
+    // ========================
+    // Unified Defense System (Power defines strength and resistance\vulnerability)
+	PhysicalResistance  UMETA(DisplayName = "Physical Resistance"),
 	FireResistance      UMETA(DisplayName = "Fire Resistance"),
 	FrostResistance     UMETA(DisplayName = "Frost Resistance"),
-	LightningResistance UMETA(DisplayName = "Lightning Resistance"),
-	PsychicResistance   UMETA(DisplayName = "Psychic Resistance"), 
 	PoisonResistance    UMETA(DisplayName = "Poison Resistance"),
+	LightningResistance UMETA(DisplayName = "Lightning Resistance"),
 	BloodResistance     UMETA(DisplayName = "Blood Resistance"),
-	DarkResistance      UMETA(DisplayName = "Dark Resistance"),
-	LightResistance     UMETA(DisplayName = "Light Resistance"),
-	MagicResistance     UMETA(DisplayName = "Magic Resistance"),
+	PsychicResistance   UMETA(DisplayName = "Psychic Resistance"),
 	NecroticResistance  UMETA(DisplayName = "Necrotic Resistance"),
-	WaterResistance     UMETA(DisplayName = "Water Resistance"),
-	
-	// ========================
-	// Negative Effects 
-	// ========================
-	Flame				UMETA(DisplayName = "Flame"),
-	Frost				UMETA(DisplayName = "Frost"),
-	Poison				UMETA(DisplayName = "Poison"),
-	Lightning			UMETA(DisplayName = "Lightning"),
-	BloodDamage			UMETA(DisplayName = "Blood"),
-	PsychicDamage       UMETA(DisplayName = "Madness"),
-	SoulDrain           UMETA(DisplayName = "Soul Drain"),
-	Corrosion           UMETA(DisplayName = "Corrosion"),		// Reduce armor (not health? maybe)
-	Curse               UMETA(DisplayName = "Curse"),			// If I'm doing system correctly - this + any damageEffect === Vulnerability to this damage type
+	AcidResistance      UMETA(DisplayName = "Acid Resistance"),
+	LightResistance      UMETA(DisplayName = "Light Resistance"),
+	DarkResistance      UMETA(DisplayName = "Dark Resistance"),
+	ChaosResistance     UMETA(DisplayName = "Chaos Resistance"),
 
-	// Vulnerabilities
-	PhysicalVulnerability  UMETA(DisplayName = "Physical Vulnerability"),  // Might be separated ("Skyrim" - oak and stone skin)
-	FireVulnerability      UMETA(DisplayName = "Fire Vulnerability"),
-	FrostVulnerability     UMETA(DisplayName = "Frost Vulnerability"),
-	LightningVulnerability UMETA(DisplayName = "Lightning Vulnerability"),
-	PsychicVulnerability   UMETA(DisplayName = "Psychic Vulnerability"), 
-	PoisonVulnerability    UMETA(DisplayName = "Poison Vulnerability"),
-	BloodVulnerability     UMETA(DisplayName = "Blood Vulnerability"),
-	DarkVulnerability     UMETA(DisplayName = "Dark Vulnerability"),
-	LightVulnerability     UMETA(DisplayName = "Light Vulnerability"),
-	MagicVulnerability     UMETA(DisplayName = "Magic Vulnerability"),
-	NecroticVulnerability  UMETA(DisplayName = "Necrotic Vulnerability"),
-	WaterVulnerability    UMETA(DisplayName = "Water Vulnerability"),
+	UniversalResistance UMETA(DisplayName = "Universal Resistance"),
 
-	// ========================
-	// Hidden Effects (Requirement/System)
-	// ========================
-	RequiresCatalyst    UMETA(DisplayName = "Requires Catalyst", Hidden),      // Catalysator === other effect or specialized material
-	RequiresMoonPhase   UMETA(DisplayName = "Requires Moon Phase", Hidden),    //
-	RequiresBlood UMETA(DisplayName = "Requires Blood ", Hidden),			   // One of the materials is blood
-	VolatileCompound    UMETA(DisplayName = "Volatile Compound", Hidden)       // Might change something in effects (their layer, to other random effect etc.)
+    // ========================
+    // Special Conditions 
+    // ========================
+    Corrosion           UMETA(DisplayName = "Corrosion"),    // Armor reducing
+    Curse               UMETA(DisplayName = "Curse"),        // Increasing incoming damage
+	Invisibility         UMETA(DisplayName = "Invisibility"),
+    // ========================
+    // Hidden Application Flags 
+    // ========================
+    // Pre-conditions to use potion without penalties
+    RequiresHeatResist  UMETA(DisplayName = "Requires Heat Resistance"), // requires Fire Resistance
+    RequiresColdVulnerable UMETA(DisplayName = "Requires Cold Vulnerability"), // Requires Frost Resistance
+    RequiresBleeding UMETA(DisplayName = "Requires Bleeding"),                  // Requires player to bleed (lose hp/sec)
+    RequiresMoonPhase UMETA(DisplayName = "Requires Moon Phase"),               // Requires special moon phase (WIP)
 };
-
-ENUM_CLASS_FLAGS(EPotionEffectType);
