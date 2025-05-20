@@ -41,13 +41,7 @@ struct FPotionMaterial : public FTableRowBase
 	// Information to categorize material (for future sorting items, for example)
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EMaterialType MaterialType = EMaterialType::Select;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FText MaterialName;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FText Description;
-
+	
 	// Tags describe "which" effects material carries on it and which will be applied when material is being used
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TMap<EPotionEffectType, FMaterialEffectData> AllEffects;

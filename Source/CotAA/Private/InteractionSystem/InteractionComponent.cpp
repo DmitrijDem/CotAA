@@ -81,6 +81,12 @@ void UInteractionComponent::BeginPlay()
 
 void UInteractionComponent::InteractionOngoingHandler(float ElapsedSeconds)
 {
+	if (!IsValid(GetActiveInteractable()))
+	{
+		OnInteractionPressOngoing.RemoveDynamic(this, &UInteractionComponent::InteractionOngoingHandler);
+		return;
+	}
+	
 	if (IsValid(InteractionWidgetRef))
 	{
 		if (InteractionWidgetRef->FindFunction("SetProgressPercent"))
@@ -108,11 +114,13 @@ void UInteractionComponent::InteractionOngoingHandler(float ElapsedSeconds)
 // This function must be called once on one interactable object
 void UInteractionComponent::InteractWithActiveInteractable()
 {
+	AActor* InteractableActor = GetActiveInteractable();
 	// Calls Interact(AActor* Interactor) on object from one of Interactibles near Interactor
-	if (IsValid(GetActiveInteractable()))
+	if (!IsValid(InteractableActor) || !InteractableActor->Implements<UInteractable>())
 	{
-		AActor* InteractableActor = GetActiveInteractable();
-
+		OnInteractionPressOngoing.RemoveDynamic(this, &UInteractionComponent::InteractionOngoingHandler);
+		return;
+	}
 		EInteractionWith Object = IInteractable::Execute_GetInteractWith(InteractableActor);
 
 		// Checking with what player interacts
@@ -144,8 +152,8 @@ void UInteractionComponent::InteractWithActiveInteractable()
 				break;
 			}
 		}
-	}
 }
+
 
 /**------------------------------ Function to handle press and hold interactables ------------------------------- **/
 void UInteractionComponent::RequestInteraction()
@@ -208,10 +216,15 @@ void UInteractionComponent::RenderInteractionWidget()
 			{
 				FProperty* InteractionTypeProperty = InteractionWidgetRef->GetClass()->FindPropertyByName(
 					TEXT("InteractionType"));
-				if (InteractionTypeProperty)
+				FProperty* InteractionWithProperty = InteractionWidgetRef->GetClass()->FindPropertyByName(
+					TEXT("InteractionWith"));
+				if (InteractionTypeProperty && InteractionWithProperty)
 				{
 					EInteractableType InteractionType = IInteractable::Execute_GetInteractionType(ActiveInteractable);
 					InteractionTypeProperty->SetValue_InContainer(InteractionWidgetRef, &InteractionType);
+
+					EInteractionWith InteractionWith = IInteractable::Execute_GetInteractWith(ActiveInteractable);
+					InteractionWithProperty->SetValue_InContainer(InteractionWidgetRef, &InteractionWith);
 				}
 				InteractionWidgetComponent->SetWidget(InteractionWidgetRef);
 				InteractionWidgetComponent->SetWorldLocation(ActiveInteractable->GetActorLocation());

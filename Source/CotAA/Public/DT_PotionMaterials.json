@@ -2,8 +2,6 @@
 	{
 		"Name": "PM_Bloodroot",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"E6561A754F436F70EA8FF9ABF9708859\", \"Blood Root\")",
-		"Description": "NSLOCTEXT(\"[3B35400E0304D2EC650312AC8A97D1B6]\", \"A3FA950142DF1A05DC8C0EA4DBEDD2A1\", \"Has scarlet veins pulsating like it has a heart.\")",
 		"AllEffects":
 		{
 			"Healing":
@@ -25,8 +23,6 @@
 	{
 		"Name": "PM_Fireleaf",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"43D996FF4BFA6B2994E1258B09EE15D4\", \"Fire Leaf\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"FireDamage":
@@ -50,8 +46,6 @@
 	{
 		"Name": "PM_Voidbloom",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"55B289D04F829E1FD891D08692ACC184\", \"VoidBloom\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"DarkDamage":
@@ -73,8 +67,6 @@
 	{
 		"Name": "PM_Sunstalk",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"0A23AE594DFA63730FFCF487A6078858\", \"SunStalk\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"LightDamage":
@@ -98,8 +90,6 @@
 	{
 		"Name": "PM_Thornweed",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"6CF07BB040EC34D34F610780F02E5CB5\", \"Thornweed\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"Bleeding":
@@ -121,8 +111,6 @@
 	{
 		"Name": "PM_Moonpetal",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"C864F4504057D5545B69D9BE219076C3\", \"Moon Petal\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"PsychicResistance":
@@ -144,8 +132,6 @@
 	{
 		"Name": "PM_Ghostvine",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"7E47E3B041095149B1D2BBABFA6620F2\", \"Ghost Vine\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"None":
@@ -167,8 +153,6 @@
 	{
 		"Name": "PM_Stromroot",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"3FA1CFD847D962AE61FB289E100DBB1E\", \"Storm Root\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"LightningDamage":
@@ -190,8 +174,6 @@
 	{
 		"Name": "PM_Plagueblossom",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"414031D941DB74460DB806B16C3EB861\", \"Plague Blossom\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"PoisonDamage":
@@ -213,8 +195,6 @@
 	{
 		"Name": "PM_Starfern",
 		"MaterialType": "Herbal",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"79F0EF0A42FA526D7C1D70B09D4B843B\", \"Starfern\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"ChaosDamage":
@@ -236,8 +216,6 @@
 	{
 		"Name": "PM_Frostcap",
 		"MaterialType": "Mushroom",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"A04D814343E360D3ADFA9287FA7E6B9A\", \"FrostCap\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"FrostDamage":
@@ -259,8 +237,6 @@
 	{
 		"Name": "PM_Deathcap",
 		"MaterialType": "Mushroom",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"5D3AFBFF435D0E9BFADA0E945F2C9781\", \"Deathcap\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"PoisonDamage":
@@ -282,8 +258,6 @@
 	{
 		"Name": "PM_Emberfungus",
 		"MaterialType": "Mushroom",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"7C8EE6834C9BEDFBB33DD49318535560\", \"Ember Fungus\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"FireDamage":
@@ -305,8 +279,6 @@
 	{
 		"Name": "PM_Shadowcap",
 		"MaterialType": "Mushroom",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"E7BACE8C46989209254C67BCCA824E40\", \"Shadowcap\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"DarkDamage":
@@ -328,8 +300,6 @@
 	{
 		"Name": "PM_GoldenElixirShroom",
 		"MaterialType": "Mushroom",
-		"MaterialName": "NSLOCTEXT(\"[825DF7D746714F3D9C2707A5649D313B]\", \"AB7074334875A25819119CB0EF2E65AF\", \"Golden Elixir Shroom\")",
-		"Description": "",
 		"AllEffects":
 		{
 			"Healing":
@@ -351,8 +321,6 @@
 	{
 		"Name": "PM_GoblinShroom",
 		"MaterialType": "Mushroom",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -364,8 +332,6 @@
 	{
 		"Name": "PM_Mindrot",
 		"MaterialType": "Mushroom",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -377,8 +343,6 @@
 	{
 		"Name": "PM_VampireBane",
 		"MaterialType": "Mushroom",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -390,8 +354,6 @@
 	{
 		"Name": "PM_WyrmTongue",
 		"MaterialType": "Herbal",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -403,8 +365,6 @@
 	{
 		"Name": "PM_FaerieRing",
 		"MaterialType": "Mushroom",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -416,8 +376,6 @@
 	{
 		"Name": "PM_IronOre",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -429,8 +387,6 @@
 	{
 		"Name": "PM_LeadSugar",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -442,8 +398,6 @@
 	{
 		"Name": "PM_ShadowCrystal",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -455,8 +409,6 @@
 	{
 		"Name": "PM_VoidShard",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -468,8 +420,6 @@
 	{
 		"Name": "PM_Sunstone",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -481,8 +431,6 @@
 	{
 		"Name": "PM_Bloodstone",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -494,8 +442,6 @@
 	{
 		"Name": "PM_ThunderGem",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -507,8 +453,6 @@
 	{
 		"Name": "PM_EarthCore",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -520,8 +464,6 @@
 	{
 		"Name": "PM_Frostquartz",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -533,8 +475,6 @@
 	{
 		"Name": "PM_Soulstone",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},
@@ -546,8 +486,6 @@
 	{
 		"Name": "PM_Moonsteel",
 		"MaterialType": "Mineral",
-		"MaterialName": "",
-		"Description": "",
 		"AllEffects":
 		{
 		},

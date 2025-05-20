@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputDataConfig.h"
-#include "PlayerStats/PlayerStatsComponent.h"
+#include "Characteristics/CharacterStatsComponent.h"
 #include "PlayerCharacter.generated.h"
 
 /**------------------------------ Forward declaration block begin------------------------------- **/
@@ -55,7 +55,7 @@ private:
 	/** ----------- PlayerStats component  ----------- **/
 	// handles HP, stamina, resistances, perks etc.
 	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	UPlayerStatsComponent* PlayerStatsComponent;
+	UCharacterStatsComponent* PlayerStatsComponent;
 	
 public:
 	UInventoryComponent* GetInventoryComponent() const;

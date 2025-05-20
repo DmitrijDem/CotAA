@@ -198,7 +198,7 @@ TArray<FInventoryItem> UInventoryKitFL::GetInventoryItems(const UObject* WorldCo
 	return InventoryItems;
 }
 
-UPlayerStatsComponent* UInventoryKitFL::GetPlayerStatsComponent(const UObject* WorldContextObject)
+UCharacterStatsComponent* UInventoryKitFL::GetPlayerStatsComponent(const UObject* WorldContextObject)
 {
 	if (!WorldContextObject) 
 	{
@@ -233,7 +233,7 @@ UPlayerStatsComponent* UInventoryKitFL::GetPlayerStatsComponent(const UObject* W
 		return nullptr;
 	}
 	
-	UPlayerStatsComponent* PlayerStatsComponent = ControlledPawn->FindComponentByClass<UPlayerStatsComponent>();
+	UCharacterStatsComponent* PlayerStatsComponent = ControlledPawn->FindComponentByClass<UCharacterStatsComponent>();
 	if (!PlayerStatsComponent)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("InventoryComponent not found on Pawn!"));

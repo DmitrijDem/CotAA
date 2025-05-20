@@ -271,7 +271,7 @@ void AGamePlayerController::DrainStamina()
 	// Actually, it is bad to do this if I'm right, but I have no time to do it in better way (maybe functions in component etc.)
 	// So, I'll do it straight way by changing values here (do not do this in normal projects, if you will change component values
 	// in multiple places - it will be hard to find where - much better way - use functions like Component->ChangeStamina(float value))
-	UPlayerStatsComponent* StatsComponent = UInventoryKitFL::GetPlayerStatsComponent(GetWorld());
+	UCharacterStatsComponent* StatsComponent = UInventoryKitFL::GetPlayerStatsComponent(GetWorld());
 	if (!StatsComponent) return;
 	float CurrentStamina = StatsComponent->GetCurrentStamina();
 	
@@ -308,7 +308,7 @@ void AGamePlayerController::DrainStamina()
 
 void AGamePlayerController::RechargeStamina()
 {
-	UPlayerStatsComponent* StatsComponent = UInventoryKitFL::GetPlayerStatsComponent(GetWorld());
+	UCharacterStatsComponent* StatsComponent = UInventoryKitFL::GetPlayerStatsComponent(GetWorld());
 	if (!StatsComponent) return;
 	float CurrentStamina = StatsComponent->GetCurrentStamina();
 

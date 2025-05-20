@@ -1,24 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "PlayerStats/PlayerStatsComponent.h"
+#include "Characteristics/CharacterStatsComponent.h"
 
 #include "Layers/LayersSubsystem.h"
 
 // Sets default values for this component's properties
-UPlayerStatsComponent::UPlayerStatsComponent()
+UCharacterStatsComponent::UCharacterStatsComponent()
 {
 	// Nothing
 }
 
-void UPlayerStatsComponent::BeginPlay()
+void UCharacterStatsComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
 	ResetCurrentStats();
 }
 
-void UPlayerStatsComponent::UpdateStats()
+void UCharacterStatsComponent::UpdateStats()
 {
 	ResetCurrentStats();
 	// ReceiveEquippedItemPerks()
@@ -39,13 +39,13 @@ void UPlayerStatsComponent::UpdateStats()
 	// Add other perks here (for example, potion effects multiplied when player drinks it, larger area for bombs explosion etc.)
 }
 
-void UPlayerStatsComponent::ResetCurrentStats()
+void UCharacterStatsComponent::ResetCurrentStats()
 {
 	CurrentStats = DefaultStats;
 	AvailablePerks.Empty();
 }
 
-void UPlayerStatsComponent::UpdatePerkValue(EPerkType PerkType, int32 NewValue)
+void UCharacterStatsComponent::UpdatePerkValue(EPerkType PerkType, int32 NewValue)
 {
 	for (auto Element : AvailablePerks)
 	{
@@ -56,7 +56,7 @@ void UPlayerStatsComponent::UpdatePerkValue(EPerkType PerkType, int32 NewValue)
 	}
 }
 
-void UPlayerStatsComponent::AddPerk(FPerkInfo PerkInfo)
+void UCharacterStatsComponent::AddPerk(FPerkInfo PerkInfo)
 {
 	bool bValid = false;
 	int32 FoundIndex = -1;
@@ -79,7 +79,7 @@ void UPlayerStatsComponent::AddPerk(FPerkInfo PerkInfo)
 	}
 }
 
-void UPlayerStatsComponent::IsPerkValid(const EPerkType SearchFor, bool& Valid, int32& Index, FPerkInfo& PerkInfo)
+void UCharacterStatsComponent::IsPerkValid(const EPerkType SearchFor, bool& Valid, int32& Index, FPerkInfo& PerkInfo)
 {
 	bool LocValid = false;
 	int32 LocIndex = -1;
@@ -105,7 +105,7 @@ void UPlayerStatsComponent::IsPerkValid(const EPerkType SearchFor, bool& Valid, 
 	PerkInfo = LocPerkInfo;
 }
 
-float UPlayerStatsComponent::GetPerkValue(const EPerkType Perk)
+float UCharacterStatsComponent::GetPerkValue(const EPerkType Perk)
 {
 	int32 LocPerkValue = 0;
 	for (auto PerkInfo: AvailablePerks)
@@ -119,17 +119,17 @@ float UPlayerStatsComponent::GetPerkValue(const EPerkType Perk)
 	return LocPerkValue;
 }
 
-void UPlayerStatsComponent::GetCurrentStats(FPlayerStats& pCurrentStats)
+void UCharacterStatsComponent::GetCurrentStats(FCharacterStats& pCurrentStats)
 {
 	pCurrentStats = CurrentStats;
 }
 
-float UPlayerStatsComponent::GetCurrentStamina()
+float UCharacterStatsComponent::GetCurrentStamina()
 {	
 	return CurrentStats.Stamina;
 }
 
-void UPlayerStatsComponent::ChangeCurrentStaminaTo(float Value)
+void UCharacterStatsComponent::ChangeCurrentStaminaTo(float Value)
 {
 	CurrentStats.Stamina = Value;
 }

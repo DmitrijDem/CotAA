@@ -33,7 +33,7 @@ APlayerCharacter::APlayerCharacter()
 	InventoryComponent = CreateDefaultSubobject<UInventoryComponent>("InventoryComponent");
 
 	// PlayerStats Component
-	PlayerStatsComponent = CreateDefaultSubobject<UPlayerStatsComponent>("PlayerStatsComponent");
+	PlayerStatsComponent = CreateDefaultSubobject<UCharacterStatsComponent>("PlayerStatsComponent");
 }
 
 void APlayerCharacter::ConfigureCamera()

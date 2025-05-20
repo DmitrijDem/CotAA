@@ -61,5 +61,5 @@ public:
 	static TArray<FInventoryItem>GetInventoryItems(const UObject* WorldContextObject, EInventoryType TargetInventory);
 
 	UFUNCTION(BlueprintCallable, meta = (WorldContext = "WorldContextObject", DefaultToSelf = "WorldContextObject"))
-	static UPlayerStatsComponent* GetPlayerStatsComponent(const UObject* WorldContextObject);
+	static UCharacterStatsComponent* GetPlayerStatsComponent(const UObject* WorldContextObject);
 };

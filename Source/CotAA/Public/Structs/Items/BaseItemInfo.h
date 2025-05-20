@@ -37,9 +37,9 @@ struct COTAADEV_API FBaseItemInfo
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Required Level")
 	int RequiredLevel;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Icon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Inventory Icon")
 	TObjectPtr<UTexture2D> InventoryIcon = nullptr;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Icon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, DisplayName="Pickup Mesh")
 	TObjectPtr<UStaticMesh> PickupMesh = nullptr;
 };

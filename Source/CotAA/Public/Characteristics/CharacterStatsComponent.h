@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "PlayerStatsComponent.generated.h"
+#include "CharacterStatsComponent.generated.h"
 
 // REMARK: I'm tired of generating all C++ files using UE5 tools - "add C++ class" - it takes about 5-10 minutes to compile
 // SO, I decided to create next structs here to use them, It is allowed by standard, but less readable in case of
@@ -55,7 +55,7 @@ public:
 };
 
 USTRUCT(BlueprintType)
-struct FPlayerStats
+struct FCharacterStats
 {
 	GENERATED_BODY()
 
@@ -80,10 +80,10 @@ public:
 	FResistanceStats ResistanceModifiers;
 
 	UPROPERTY(EditDefaultsOnly, Category="Stamina")
-	float RunDrainRate = -10.f; // Run drain rate
+	float RunDrainRate = -2.f; // Run drain rate
 
 	UPROPERTY(EditDefaultsOnly, Category="Stamina")
-	float SprintDrainRate = -25.f; // Sprint drain rate
+	float SprintDrainRate = -6.f; // Sprint drain rate
 	
 	UPROPERTY(EditDefaultsOnly, Category="Stamina")
 	float StaminaRechargeRate = 15.f; // Stamina Recovery rate
@@ -123,20 +123,20 @@ struct FPerkInfo
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class COTAADEV_API UPlayerStatsComponent : public UActorComponent
+class COTAADEV_API UCharacterStatsComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:	
-	UPlayerStatsComponent();
+	UCharacterStatsComponent();
 
 	virtual void BeginPlay() override;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ExposeOnSpawn="true"))
-	FPlayerStats DefaultStats;
+	FCharacterStats DefaultStats;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FPlayerStats CurrentStats;
+	FCharacterStats CurrentStats;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<FPerkInfo> AvailablePerks;
@@ -175,7 +175,7 @@ public:
 
 	// "CurrentStats" parameter overrides same one in class
 	UFUNCTION(BlueprintCallable, Category="Send")
-	void GetCurrentStats(FPlayerStats& pCurrentStats);
+	void GetCurrentStats(FCharacterStats& pCurrentStats);
 
 	UFUNCTION(BlueprintCallable, Category="Stamina")
 	float GetCurrentStamina();
