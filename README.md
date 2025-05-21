@@ -108,6 +108,9 @@ It is possible to add a multiplayer (cooperative mode) of the "Server-Client" ty
 ### Low Poly Nature: Essentials
     Ссылка/Link: https://www.fab.com/listings/a607441d-b811-440b-a20c-59e74804c4ce
     Лицензия/License: Personnel/Non-Commersial
+### Assets: Depressive Backgrounds
+    Ссылка/Link: https://wenrexa.itch.io/depressive-loading-screens
+    Лицензия/License: Commercial and free use; Attribution not required; (I don't know which license is standard for itch.io)
 ### UE5 Starter Pack Content
     Ссылка/Link: -
     Лицензия/License: Epic EULA

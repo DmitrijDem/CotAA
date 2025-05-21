@@ -66,10 +66,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Complete Kit| Widget Events")
 	void DisplayGameWidget(Enum_GameState GameState);
-
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Complete Kit| Widget Events")
-	void HideLoadingScreen(float Delay);
-
+	
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category="Complete Kit| Widget Events")
 	void TogglePauseMenu();
 	

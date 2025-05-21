@@ -146,41 +146,11 @@ TArray<FInventoryItem> UInventoryKitFL::SortItemsByRarity(TArray<FInventoryItem>
 {
 	if (InventoryItems.Num() != 0)
 	{
-		int LocLastIndex = InventoryItems.Num() - 1;
-		int LocCurrentIndex = 0;
-		int LocCurrentInt = 0;
-
-		for (auto InventoryItem : InventoryItems)
-		{
-			for (int i = 0; i < LocLastIndex - 1; i++)
-			{
-				LocCurrentIndex = i;
-
-				FInventoryItem CurrentInventoryItem = InventoryItems[i];
-
-				if (LocLastIndex > 0)
-				{
-					LocCurrentInt = FMath::Clamp(LocCurrentInt + 1, 0, LocLastIndex);
-				}
-				else
-				{
-					LocCurrentInt = 0;
-				}
-
-				FInventoryItem NextInventoryItem = InventoryItems[LocCurrentInt];
-
-				LocCurrentInt = static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(CurrentInventoryItem).BaseItemInfo.ItemRarity);
-
-				// if true = sorting from the lowest rarity, if false = sorting from the highest rarity
-				// Analog of Select and branch after it
-				if (FromRarest ? LocCurrentInt < static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(NextInventoryItem).BaseItemInfo.ItemRarity)
-				: LocCurrentInt > static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(NextInventoryItem).BaseItemInfo.ItemRarity))
-				{
-					Swap(InventoryItems[LocCurrentIndex], InventoryItems[LocLastIndex + 1]);
-				}
-			}
-			LocLastIndex = LocLastIndex--;
-		}
+		InventoryItems.Sort([FromRarest](const FInventoryItem& A, const FInventoryItem& B) {
+	const int RarityA = static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(A).BaseItemInfo.ItemRarity);
+	const int RarityB = static_cast<int>(UInventoryKitFL::GetInventoryItemInfo(B).BaseItemInfo.ItemRarity);
+	return FromRarest ? RarityA > RarityB : RarityA < RarityB;
+});
 	}
 	return InventoryItems;
 }
