@@ -167,7 +167,7 @@ public:
 	//UFUNCTION(EditAnywhere, BlueprintCallable, Category="Receive")
 	//int32 GetTotalValueFromItems(EBaseGearType GearType)
 
-	//UFUNCTION(EditAnywhere, BlueprintCallable, Categort="Receive")
+	//UFUNCTION(EditAnywhere, BlueprintCallable, Category="Receive")
 	//void ReceiveEquippedItemPerks()
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category="Send")
@@ -182,5 +182,4 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category="Stamina")
 	void ChangeCurrentStaminaTo(float Value);
-	
 };

@@ -11,6 +11,7 @@
 /* ------------------------------ Custom Libraries------------------------------- */
 #include "InteractionSystem/InteractionComponent.h"
 #include "InteractionSystem/InventoryComponent.h"
+#include "UObject/UnrealTypePrivate.h"
 
 /* ------------------------------ Constructor ------------------------------- */
 APlayerCharacter::APlayerCharacter()
@@ -34,6 +35,7 @@ APlayerCharacter::APlayerCharacter()
 
 	// PlayerStats Component
 	PlayerStatsComponent = CreateDefaultSubobject<UCharacterStatsComponent>("PlayerStatsComponent");
+	
 }
 
 void APlayerCharacter::ConfigureCamera()
@@ -64,6 +66,15 @@ void APlayerCharacter::ConfigureCamera()
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (HUDWidgetClass)
+	{
+		HUDWidget = CreateWidget<UUserWidget>(GetWorld(), HUDWidgetClass);
+		if (HUDWidget)
+		{
+			HUDWidget->AddToViewport();
+		}
+	}
 }
 
 /* ------------------------------ Tick ------------------------------- */
@@ -71,6 +82,11 @@ void APlayerCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+UInventoryComponent* APlayerCharacter::GetInventoryComponent() const
+{
+	return nullptr; // Specially made because I don't use this anywhere for now
 }
 
 UInteractionComponent* APlayerCharacter::GetInteractionComponent() const
@@ -81,4 +97,9 @@ UInteractionComponent* APlayerCharacter::GetInteractionComponent() const
 	}
 
 	return nullptr;
+}
+
+UCharacterStatsComponent* APlayerCharacter::GetCharacterStatsComponent() const
+{
+	return PlayerStatsComponent;
 }

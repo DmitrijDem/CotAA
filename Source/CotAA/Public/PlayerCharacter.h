@@ -31,7 +31,7 @@ protected:
 	/**------------------------------ Constructor ------------------------------- **/
 public:
 	APlayerCharacter();
-
+	
 	// setup functions
 	void ConfigureCamera();
 	
@@ -61,5 +61,12 @@ public:
 	UInventoryComponent* GetInventoryComponent() const;
 
 	UInteractionComponent* GetInteractionComponent() const;
-	
+
+	UCharacterStatsComponent* GetCharacterStatsComponent() const;
+
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<UUserWidget> HUDWidgetClass;
+
+	UPROPERTY()
+	UUserWidget* HUDWidget;
 };
