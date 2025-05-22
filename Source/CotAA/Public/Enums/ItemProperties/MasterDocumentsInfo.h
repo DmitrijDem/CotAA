@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class COTAADEV_API UMasterDocumentsInfo : public UUserDefinedEnum
+class COTAA_API UMasterDocumentsInfo : public UUserDefinedEnum
 {
 	GENERATED_BODY()
 	

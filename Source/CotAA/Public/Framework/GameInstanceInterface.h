@@ -43,7 +43,7 @@ struct FGameWidgetsStruct
 /**
  * 
  */
-class COTAADEV_API IGameInstanceInterface
+class COTAA_API IGameInstanceInterface
 {
 	GENERATED_BODY()
 

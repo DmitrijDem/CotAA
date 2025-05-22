@@ -37,7 +37,7 @@ struct FPotionBehavior
 };
 
 USTRUCT(BlueprintType)
-struct COTAADEV_API FBrewedPotion
+struct COTAA_API FBrewedPotion
 {
 	GENERATED_BODY()
 

@@ -10,7 +10,7 @@
  * 
  */
 USTRUCT(BlueprintType)
-struct COTAADEV_API FTradeGoodMasterInfo : public FTableRowBase
+struct COTAA_API FTradeGoodMasterInfo : public FTableRowBase
 {
 	GENERATED_BODY()
 

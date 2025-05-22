@@ -27,7 +27,7 @@ public:
 };
 
 UCLASS(Blueprintable, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class COTAADEV_API UInventoryComponent : public UActorComponent
+class COTAA_API UInventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

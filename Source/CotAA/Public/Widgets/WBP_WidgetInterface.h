@@ -18,7 +18,7 @@ class UWBP_WidgetInterface : public UInterface
 /**
  * Interface used in widget blueprints
  **/
-class COTAADEV_API IWBP_WidgetInterface
+class COTAA_API IWBP_WidgetInterface
 {
 	GENERATED_BODY()
 

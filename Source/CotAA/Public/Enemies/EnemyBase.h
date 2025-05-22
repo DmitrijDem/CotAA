@@ -28,7 +28,7 @@ struct FEnemyStats
 };
 
 UCLASS()
-class COTAADEV_API AEnemyBase : public ACharacter, public IDamageable
+class COTAA_API AEnemyBase : public ACharacter, public IDamageable
 {
 	GENERATED_BODY()
 

@@ -10,7 +10,7 @@
  * struct to describe potion layer in creation UI
  */
 USTRUCT(BlueprintType)
-struct COTAADEV_API FPotionLayer
+struct COTAA_API FPotionLayer
 {
 	GENERATED_BODY()
 

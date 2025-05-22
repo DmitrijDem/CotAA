@@ -12,7 +12,7 @@
  *  Better for organization, but sometimes, on failed build - you might need to recreate file inside editor
  */
 UCLASS()
-class COTAADEV_API UInputDataConfig : public UDataAsset
+class COTAA_API UInputDataConfig : public UDataAsset
 {
 	GENERATED_BODY()
 	

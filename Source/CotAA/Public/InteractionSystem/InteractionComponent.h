@@ -10,7 +10,7 @@
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInteractionPressOngoing, float, ElapsedSeconds);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class COTAADEV_API UInteractionComponent : public UActorComponent
+class COTAA_API UInteractionComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

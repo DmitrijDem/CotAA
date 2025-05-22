@@ -8,7 +8,7 @@
 #include "SkeletonBase.generated.h"
 
 UCLASS()
-class COTAADEV_API ASkeletonAIController : public AAIController
+class COTAA_API ASkeletonAIController : public AAIController
 {
 	GENERATED_BODY()
 
@@ -22,7 +22,7 @@ private:
 };
 
 UCLASS()
-class COTAADEV_API ASkeletonBase : public AEnemyBase
+class COTAA_API ASkeletonBase : public AEnemyBase
 {
 	GENERATED_BODY()
 

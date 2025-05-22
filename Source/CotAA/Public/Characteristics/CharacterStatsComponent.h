@@ -123,7 +123,7 @@ struct FPerkInfo
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class COTAADEV_API UCharacterStatsComponent : public UActorComponent
+class COTAA_API UCharacterStatsComponent : public UActorComponent
 {
 	GENERATED_BODY()
 

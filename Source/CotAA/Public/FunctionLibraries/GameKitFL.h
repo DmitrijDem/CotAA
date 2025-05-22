@@ -12,7 +12,7 @@
  */
 
 UCLASS()
-class COTAADEV_API UGameKitFL : public UBlueprintFunctionLibrary
+class COTAA_API UGameKitFL : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 

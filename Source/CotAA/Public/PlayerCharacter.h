@@ -15,7 +15,7 @@ class UInventoryComponent;
 class UInteractionComponent;
 
 UCLASS()
-class COTAADEV_API APlayerCharacter : public ACharacter
+class COTAA_API APlayerCharacter : public ACharacter
 {
 	GENERATED_BODY()
 

@@ -10,7 +10,7 @@
  * 
  */
 USTRUCT(BlueprintType)
-struct COTAADEV_API FSavedGameplayInfo
+struct COTAA_API FSavedGameplayInfo
 {
 	GENERATED_BODY()
 

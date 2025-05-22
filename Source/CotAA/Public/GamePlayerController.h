@@ -29,7 +29,7 @@ enum class EMovementState : uint8
 };
 
 UCLASS()
-class COTAADEV_API AGamePlayerController : public APlayerController, public IPlayerControllerInterface
+class COTAA_API AGamePlayerController : public APlayerController, public IPlayerControllerInterface
 {
 	GENERATED_BODY()
 

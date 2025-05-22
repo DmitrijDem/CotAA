@@ -15,7 +15,7 @@
  */
 
 UCLASS()
-class COTAADEV_API AGoblinAIController : public AAIController
+class COTAA_API AGoblinAIController : public AAIController
 {
 	GENERATED_BODY()
 
@@ -29,7 +29,7 @@ public:
 };
 
 UCLASS()
-class COTAADEV_API AGoblinBase : public AEnemyBase
+class COTAA_API AGoblinBase : public AEnemyBase
 {
 	GENERATED_BODY()
 

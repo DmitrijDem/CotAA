@@ -17,7 +17,7 @@ class UPlayerControllerInterface : public UInterface
 /**
  * 
  */
-class COTAADEV_API IPlayerControllerInterface
+class COTAA_API IPlayerControllerInterface
 {
 	GENERATED_BODY()
 

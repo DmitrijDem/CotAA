@@ -7,12 +7,12 @@
 #include "Damageable.generated.h"
 
 UINTERFACE(BlueprintType)
-class COTAADEV_API UDamageable : public UInterface
+class COTAA_API UDamageable : public UInterface
 {
 	GENERATED_BODY()
 };
 
-class COTAADEV_API IDamageable
+class COTAA_API IDamageable
 {
 	GENERATED_BODY()
 
