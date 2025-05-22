@@ -1,0 +1,497 @@
+[
+	{
+		"Name": "PM_Bloodroot",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"Healing":
+			{
+				"Power": 20,
+				"bIsDiscovered": false
+			},
+			"BloodDamage":
+			{
+				"Power": 15,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 10,
+		"Amount": 1,
+		"ValueAsCoin": 150
+	},
+	{
+		"Name": "PM_Fireleaf",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"FireDamage":
+			{
+				"Power": 25,
+				"bIsDiscovered": false
+			},
+			"FireResistance":
+			{
+				"Power": 18,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [
+			"UnstableReaction"
+		],
+		"Toxicity": 12,
+		"Amount": 1,
+		"ValueAsCoin": 180
+	},
+	{
+		"Name": "PM_Voidbloom",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"DarkDamage":
+			{
+				"Power": 35,
+				"bIsDiscovered": false
+			},
+			"NecroticResistance":
+			{
+				"Power": 22,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 25,
+		"Amount": 1,
+		"ValueAsCoin": 200
+	},
+	{
+		"Name": "PM_Sunstalk",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"LightDamage":
+			{
+				"Power": 30,
+				"bIsDiscovered": false
+			},
+			"LightResistance":
+			{
+				"Power": 40,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [
+			"LunarInfused"
+		],
+		"Toxicity": 8,
+		"Amount": 1,
+		"ValueAsCoin": 200
+	},
+	{
+		"Name": "PM_Thornweed",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"Bleeding":
+			{
+				"Power": 28,
+				"bIsDiscovered": false
+			},
+			"PhysicalResistance":
+			{
+				"Power": 15,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 18,
+		"Amount": 1,
+		"ValueAsCoin": 170
+	},
+	{
+		"Name": "PM_Moonpetal",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"PsychicResistance":
+			{
+				"Power": 50,
+				"bIsDiscovered": false
+			},
+			"PsychicDamage":
+			{
+				"Power": 12,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 5,
+		"Amount": 1,
+		"ValueAsCoin": 250
+	},
+	{
+		"Name": "PM_Ghostvine",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"None":
+			{
+				"Power": 100,
+				"bIsDiscovered": false
+			},
+			"Curse":
+			{
+				"Power": -20,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 30,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Stromroot",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"LightningDamage":
+			{
+				"Power": 45,
+				"bIsDiscovered": false
+			},
+			"LightningResistance":
+			{
+				"Power": 25,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 20,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Plagueblossom",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"PoisonDamage":
+			{
+				"Power": 38,
+				"bIsDiscovered": false
+			},
+			"PoisonResistance":
+			{
+				"Power": 32,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 40,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Starfern",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+			"ChaosDamage":
+			{
+				"Power": 60,
+				"bIsDiscovered": false
+			},
+			"UniversalResistance":
+			{
+				"Power": 10,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 35,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Frostcap",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+			"FrostDamage":
+			{
+				"Power": 40,
+				"bIsDiscovered": false
+			},
+			"FrostResistance":
+			{
+				"Power": 35,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 5,
+		"Amount": 1,
+		"ValueAsCoin": 150
+	},
+	{
+		"Name": "PM_Deathcap",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+			"PoisonDamage":
+			{
+				"Power": 40,
+				"bIsDiscovered": false
+			},
+			"NecroticResistance":
+			{
+				"Power": 25,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 80,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Emberfungus",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+			"FireDamage":
+			{
+				"Power": 50,
+				"bIsDiscovered": false
+			},
+			"FireResistance":
+			{
+				"Power": 30,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 20,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Shadowcap",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+			"DarkDamage":
+			{
+				"Power": 60,
+				"bIsDiscovered": false
+			},
+			"DarkResistance":
+			{
+				"Power": 45,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 10,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_GoldenElixirShroom",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+			"Healing":
+			{
+				"Power": 50,
+				"bIsDiscovered": false
+			},
+			"Regeneration":
+			{
+				"Power": 30,
+				"bIsDiscovered": false
+			}
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_GoblinShroom",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Mindrot",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_VampireBane",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_WyrmTongue",
+		"MaterialType": "Herbal",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_FaerieRing",
+		"MaterialType": "Mushroom",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_IronOre",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_LeadSugar",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_ShadowCrystal",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_VoidShard",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Sunstone",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Bloodstone",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_ThunderGem",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_EarthCore",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Frostquartz",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Soulstone",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	},
+	{
+		"Name": "PM_Moonsteel",
+		"MaterialType": "Mineral",
+		"AllEffects":
+		{
+		},
+		"CraftingFlags": [],
+		"Toxicity": 0,
+		"Amount": 0,
+		"ValueAsCoin": 0
+	}
+]

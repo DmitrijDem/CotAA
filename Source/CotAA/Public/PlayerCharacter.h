@@ -4,10 +4,15 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "InputActionValue.h"
-
-
+#include "InputDataConfig.h"
+#include "Characteristics/CharacterStatsComponent.h"
 #include "PlayerCharacter.generated.h"
+
+/**------------------------------ Forward declaration block begin------------------------------- **/
+// This block serves as "I know, there WILL BE some class which will be used in blueprints, but they are not #included yet"
+class UInventoryComponent;
+/**------------------------------ Forward declaration block end------------------------------- **/
+class UInteractionComponent;
 
 UCLASS()
 class COTAA_API APlayerCharacter : public ACharacter
@@ -15,76 +20,53 @@ class COTAA_API APlayerCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
+	/**------------------------------ Components block------------------------------- **/
 
-	/* ------------------------------ Components block------------------------------- */
-
-	UPROPERTY(VisibleAnywhere, Category = "EnhancedInput")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class USpringArmComponent* SpringArm;
 
-	UPROPERTY(VisibleAnywhere, Category = "EnhancedInput")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCameraComponent* Camera;
-	/* ------------------------------ Enhanced Input Block------------------------------- */
-protected:
-
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputMappingContext* InputMapping;
-
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* MoveAction;
-
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* LookAction;
-
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* JumpAction;
-
-	UPROPERTY(EditAnywhere, Category = "EnhancedInput")
-	class UInputAction* InteractAction;
-
-	/* ------------------------------ Constructor ------------------------------- */
+		
+	/**------------------------------ Constructor ------------------------------- **/
 public:
 	APlayerCharacter();
-
-	/* ------------------------------ BeginPlay ------------------------------- */
+	
+	// setup functions
+	void ConfigureCamera();
+	
+	/**------------------------------ BeginPlay ------------------------------- **/
 protected:
 	virtual void BeginPlay() override;
-	/* ------------------------------ Tick event ------------------------------- */
-public:	
+	/**------------------------------ Tick event ------------------------------- **/
+public:
 	virtual void Tick(float DeltaTime) override;
 
-	/* ------------------------------ Enhanced Input setup function ------------------------------- */
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
+	/**------------------------------ Custom Components block ------------------------------- **/
+	/** ----------- Interaction component ----------- **/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UInteractionComponent* InteractionComponent;
+	
+	/** ----------- Inventory component ----------- **/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UInventoryComponent* InventoryComponent;
 
-	/* ------------------------------ Enhanced Input handler-functions block ------------------------------- */
-protected:
-
-	// MoveAction handler
-	UFUNCTION()
-	void Move(const FInputActionValue& Value);
-
-	// LookAction handler
-	UFUNCTION()
-	void Look(const FInputActionValue& Value);
-
-	// InteractAction handler
-	void Jump();
-
-	// InteractAction handler
-	UFUNCTION()
-	void Interact();
-
-	/* ------------------------------ Interaction system variables ------------------------------- */
+	/** ----------- PlayerStats component  ----------- **/
+	// handles HP, stamina, resistances, perks etc.
+	UPROPERTY(VisibleAnywhere, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCharacterStatsComponent* PlayerStatsComponent;
+	
 public:
+	UInventoryComponent* GetInventoryComponent() const;
 
-	// Array of Actor* objects near player to interact with
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Interactables")
-	TArray<AActor*> InteractablesInRange;
+	UInteractionComponent* GetInteractionComponent() const;
 
-	// Capsule component overlap events to add objects from array
-	UFUNCTION()
-	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	UCharacterStatsComponent* GetCharacterStatsComponent() const;
 
-	// Capsule component overlap event to delete objects from array
-	UFUNCTION()
-	void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	UPROPERTY(EditAnywhere, Category = "UI")
+	TSubclassOf<UUserWidget> HUDWidgetClass;
+
+	UPROPERTY()
+	UUserWidget* HUDWidget;
 };
